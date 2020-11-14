@@ -1,0 +1,146 @@
+<div>
+  <div>
+    <h1>
+      Service #<%= @the_service.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/services">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_service/<%= @the_service.id %>">
+          Delete service
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Service name
+      </dt>
+      <dd>
+        <%= @the_service.service_name %>
+      </dd>
+
+      <dt>
+        Category
+      </dt>
+      <dd>
+        <%= @the_service.category %>
+      </dd>
+
+      <dt>
+        Date
+      </dt>
+      <dd>
+        <%= @the_service.date %>
+      </dd>
+
+      <dt>
+        Image
+      </dt>
+      <dd>
+        <%= @the_service.image %>
+      </dd>
+
+      <dt>
+        Receiver
+      </dt>
+      <dd>
+        <%= @the_service.receiver_id %>
+      </dd>
+
+      <dt>
+        Coupon
+      </dt>
+      <dd>
+        <%= @the_service.coupon_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_service.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_service.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit service
+    </h2>
+
+    <form action="/modify_service/<%= @the_service.id %>"  method="post" >
+      <div>
+        <label for="service_name_box">
+          Service name
+        </label>
+
+        <input type="text" id="service_name_box" name="query_service_name" value="<%= @the_service.service_name %>">
+      </div>
+
+      <div>
+        <label for="category_box">
+          Category
+        </label>
+
+        <input type="text" id="category_box" name="query_category" value="<%= @the_service.category %>">
+      </div>
+
+      <div>
+        <label for="date_box">
+          Date
+        </label>
+
+        <input type="date" id="date_box" name="query_date" value="<%= @the_service.date %>">
+      </div>
+
+      <div>
+        <label for="image_box">
+          Image
+        </label>
+
+        <input type="text" id="image_box" name="query_image" value="<%= @the_service.image %>">
+      </div>
+
+      <div>
+        <label for="receiver_id_box">
+          Receiver
+        </label>
+
+        <input type="text" id="receiver_id_box" name="query_receiver_id" value="<%= @the_service.receiver_id %>">
+      </div>
+
+      <div>
+        <label for="coupon_id_box">
+          Coupon
+        </label>
+
+        <input type="text" id="coupon_id_box" name="query_coupon_id" value="<%= @the_service.coupon_id %>">
+      </div>
+
+      <button>
+        Update service
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
