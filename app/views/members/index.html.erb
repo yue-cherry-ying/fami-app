@@ -1,7 +1,8 @@
 <div>
   <div>
     <h1>
-      List of all members
+      Our Loving Family!
+      <%# List of all family members %>
     </h1>
   </div>
 </div>
@@ -11,7 +12,7 @@
 <div>
   <div>
     <h2>
-      Add a new member
+      Add a new member of the family
     </h2>
 
     <form action="/insert_member" method="post">
@@ -20,7 +21,7 @@
           Name
         </label>
 
-        <input type="text" id="name_box" name="query_name">
+        <input type="text" id="name_box" name="query_name" placeholder="Enter the family member name (indicate family relationship, if applicable">
       </div>
 
       <div>
@@ -28,7 +29,7 @@
           Profile image
         </label>
 
-        <input type="text" id="profile_image_box" name="query_profile_image">
+        <input type="text" id="profile_image_box" name="query_profile_image" placeholder="Enter a URL for the image...">
       </div>
 
       <div>
@@ -36,7 +37,7 @@
           Bio
         </label>
 
-        <textarea id="bio_box" name="query_bio" rows="3"></textarea>
+        <textarea id="bio_box" name="query_bio" rows="3" placeholder="Enter something that represents or inspires the member..."></textarea>
       </div>
 
       <button>
@@ -49,7 +50,7 @@
 <hr>
 <div>
   <div>
-    <table>
+    <table border="1">
       <tr>
         <th>
           ID
@@ -68,14 +69,6 @@
         </th>
 
         <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
         </th>
       </tr>
 
@@ -90,18 +83,11 @@
         </td>
 
         <td>
-          <%= a_member.profile_image %>
+          <img src=<%= a_member.profile_image %> style="width:250px;">
         </td>
 
         <td>
           <%= a_member.bio %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_member.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_member.updated_at) %> ago
         </td>
 
         <td>

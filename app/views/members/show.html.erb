@@ -1,21 +1,23 @@
 <div>
   <div>
     <h1>
-      Member #<%= @the_member.id %> details
+      Profile for <%= @the_member.name %>
     </h1>
 
     <div>
       <div>
-        <a href="/members">
+        <a href="/members" class="btn btn-block btn-outline-secondary">
           Go back
         </a>
-      </div>
 
-      <div>
-        <a href="/delete_member/<%= @the_member.id %>">
+        &nbsp;|&nbsp;
+        
+        <a href="/delete_member/<%= @the_member.id %>" class="btn btn-block btn-outline-secondary">
           Delete member
         </a>
       </div>
+
+      
     </div>
 
     <dl>
@@ -30,7 +32,7 @@
         Profile image
       </dt>
       <dd>
-        <%= @the_member.profile_image %>
+        <img src=<%= @the_member.profile_image %> style="width:250px;">
       </dd>
 
       <dt>
@@ -40,19 +42,6 @@
         <%= @the_member.bio %>
       </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_member.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_member.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>
