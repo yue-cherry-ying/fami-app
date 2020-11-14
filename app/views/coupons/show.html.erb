@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Coupon #<%= @the_coupon.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/coupons">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_coupon/<%= @the_coupon.id %>">
+          Delete coupon
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Giver
+      </dt>
+      <dd>
+        <%= @the_coupon.giver_id %>
+      </dd>
+
+      <dt>
+        Receiver
+      </dt>
+      <dd>
+        <%= @the_coupon.receiver_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_coupon.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_coupon.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit coupon
+    </h2>
+
+    <form action="/modify_coupon/<%= @the_coupon.id %>"  method="post" >
+      <div>
+        <label for="giver_id_box">
+          Giver
+        </label>
+
+        <input type="text" id="giver_id_box" name="query_giver_id" value="<%= @the_coupon.giver_id %>">
+      </div>
+
+      <div>
+        <label for="receiver_id_box">
+          Receiver
+        </label>
+
+        <input type="text" id="receiver_id_box" name="query_receiver_id" value="<%= @the_coupon.receiver_id %>">
+      </div>
+
+      <button>
+        Update coupon
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

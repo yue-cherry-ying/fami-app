@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all coupons
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new coupon
+    </h2>
+
+    <form action="/insert_coupon" method="post">
+      <div>
+        <label for="giver_id_box">
+          Giver
+        </label>
+
+        <input type="text" id="giver_id_box" name="query_giver_id">
+      </div>
+
+      <div>
+        <label for="receiver_id_box">
+          Receiver
+        </label>
+
+        <input type="text" id="receiver_id_box" name="query_receiver_id">
+      </div>
+
+      <button>
+        Create coupon
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Giver
+        </th>
+
+        <th>
+          Receiver
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_coupons.each do |a_coupon| %>
+      <tr>
+        <td>
+          <%= a_coupon.id %>
+        </td>
+
+        <td>
+          <%= a_coupon.giver_id %>
+        </td>
+
+        <td>
+          <%= a_coupon.receiver_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_coupon.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_coupon.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/coupons/<%= a_coupon.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
