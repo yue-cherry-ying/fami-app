@@ -1,7 +1,8 @@
 <div>
   <div>
     <h1>
-      List of all services
+      Services Offered
+      <%# List of all services %>
     </h1>
   </div>
 </div>
@@ -11,7 +12,7 @@
 <div>
   <div>
     <h2>
-      Add a new service
+      + Add A Service
     </h2>
 
     <form action="/insert_service" method="post">
@@ -20,7 +21,7 @@
           Service name
         </label>
 
-        <input type="text" id="service_name_box" name="query_service_name">
+        <input type="text" id="service_name_box" name="query_service_name" placeholder="Enter a service name">
       </div>
 
       <div>
@@ -28,7 +29,12 @@
           Category
         </label>
 
-        <input type="text" id="category_box" name="query_category">
+        <select id="category_box" name="query_category" placeholder="Choose a category from the list">
+          <option value="washing">Washing</option>
+          <option value="cooking">Cooking</option>
+          <option value="cleaning">Cleaning</option>
+          <option value="other">Other</option>
+        </select>
       </div>
 
       <div>
@@ -36,7 +42,7 @@
           Date
         </label>
 
-        <input type="date" id="date_box" name="query_date">
+        <input type="date" id="date_box" name="query_date" placeholder="Enter the date of the service...">
       </div>
 
       <div>
@@ -44,12 +50,12 @@
           Image
         </label>
 
-        <input type="text" id="image_box" name="query_image">
+        <input type="text" id="image_box" name="query_image" placeholder="Enter a URL for the image...">
       </div>
 
       <div>
         <label for="receiver_id_box">
-          Receiver
+          Receiver ID
         </label>
 
         <input type="text" id="receiver_id_box" name="query_receiver_id">
@@ -57,7 +63,7 @@
 
       <div>
         <label for="coupon_id_box">
-          Coupon
+          Coupon ID
         </label>
 
         <input type="text" id="coupon_id_box" name="query_coupon_id">
@@ -96,19 +102,11 @@
         </th>
 
         <th>
-          Receiver
+          Receiver ID
         </th>
 
         <th>
-          Coupon
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
+          Coupon ID
         </th>
 
         <th>
@@ -134,7 +132,7 @@
         </td>
 
         <td>
-          <%= a_service.image %>
+          <img src=<%= a_service.image %> style="width:250px;">
         </td>
 
         <td>
@@ -143,13 +141,6 @@
 
         <td>
           <%= a_service.coupon_id %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_service.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_service.updated_at) %> ago
         </td>
 
         <td>
