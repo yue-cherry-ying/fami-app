@@ -48,6 +48,49 @@
 
 <hr>
 
+<h2>Coupons</h2>
+
+<table border="1">
+  <tr>
+    <th>
+      Coupon Content
+    </th>
+
+    <th>
+      Giver Name
+    </th>
+
+    <th>
+      Expiration Date
+    </th>
+  </tr>
+
+  <% @the_member.characters.each do |a_character| %>
+    <tr>
+      <td>
+        <%= a_character.movie.title %>
+      </td>
+
+      <td>
+        <%= a_character.movie.year %>
+      </td>
+
+      <td>
+        <%= a_character.movie.director.name %>
+      </td>
+
+      <td>
+        <%= a_character.name %>
+      </td>
+
+      <td>
+        <a href="/movies/<%= a_character.movie.id %>">
+          Show details
+        </a>
+      </td>
+    </tr>
+  <% end %>
+</table>
 
 <div>
   <div>
