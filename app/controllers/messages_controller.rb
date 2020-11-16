@@ -20,7 +20,8 @@ class MessagesController < ApplicationController
   def create
     the_message = Message.new
     the_message.content = params.fetch("query_content")
-    the_message.giver_id = params.fetch("query_giver_id")
+    # the_message.giver_id = params.fetch("query_giver_id")
+    the_message.giver_id = params.fetch(:user_id)
     the_message.receiver_id = params.fetch("query_receiver_id")
 
     if the_message.valid?

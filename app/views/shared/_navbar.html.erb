@@ -29,16 +29,23 @@
             </a>
           </div>
         </li>
-        <%# <nav> %>
-          <div>
-              <a href="/user_sign_in">Sign In</a>
-              <a href="/user_sign_up">Sign Up</a>
-              <a href="/user_sign_out">Sign Out</a>
-              <a href="/users">Users</a>
-              <a href="/photos">Photos</a>
+        <% if @current_user != nil %>
+          <li class="nav-item">
+            <a href="/user_sign_out" class="nav-link">Sign Out</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link disabled">
               <%= session.fetch(:user_id) %>
-          </div>
-        <%# </nav> %>
+            </a>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a href="/user_sign_in" class="nav-link">Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a href="/user_sign_up"class="nav-link">Sign Up</a>
+          </li>
+        <% end %>
       </ul>
     </div> <!-- .navbar-collapse -->
   </div> <!-- .container -->
