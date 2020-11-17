@@ -9,6 +9,7 @@
 #  service_name :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  giver_id     :integer
 #  receiver_id  :integer
 #
 class Service < ApplicationRecord
