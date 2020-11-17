@@ -10,7 +10,7 @@
           Go back
         </a>
 
-        &nbsp;|&nbsp;
+        <%# &nbsp;|&nbsp; %>
         
         <a href="/delete_member/<%= @the_member.id %>" class="btn btn-block btn-outline-secondary">
           Delete member
@@ -65,26 +65,22 @@
     </th>
   </tr>
 
-  <% @the_member.characters.each do |a_character| %>
+  <% @the_member.coupons.each do |a_coupon| %>
     <tr>
       <td>
-        <%= a_character.movie.title %>
+        <%= a_coupon.service.service_name %>
       </td>
 
       <td>
-        <%= a_character.movie.year %>
+        <%= a_coupon.giver_id %>
       </td>
 
       <td>
-        <%= a_character.movie.director.name %>
+        <%= a_coupon.receiver_id %>
       </td>
 
       <td>
-        <%= a_character.name %>
-      </td>
-
-      <td>
-        <a href="/movies/<%= a_character.movie.id %>">
+        <a href="/services/<%= a_coupon.service.id %>">
           Show details
         </a>
       </td>
