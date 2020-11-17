@@ -68,7 +68,7 @@
   <% @the_member.coupons.each do |a_coupon| %>
     <tr>
       <td>
-        <%= a_coupon.service.service_name %>
+        <%= a_coupon.coupon_content %>
       </td>
 
       <td>
@@ -76,12 +76,12 @@
       </td>
 
       <td>
-        <%= a_coupon.receiver_id %>
+        <%= a_coupon.expiration_date %>
       </td>
 
       <td>
         <a href="/services/<%= a_coupon.service.id %>">
-          Show details
+          Show details of the linked service
         </a>
       </td>
     </tr>

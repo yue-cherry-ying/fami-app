@@ -23,6 +23,6 @@ class Coupon < ApplicationRecord
   # end
   belongs_to(:service, {
     :class_name => "Service",
-    :foreign_key => "edeem_service_id"
+    :foreign_key => "redeem_service_id"
   })
 end
