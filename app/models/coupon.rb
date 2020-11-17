@@ -2,11 +2,14 @@
 #
 # Table name: coupons
 #
-#  id          :integer          not null, primary key
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  giver_id    :integer
-#  receiver_id :integer
+#  id                :integer          not null, primary key
+#  coupon_content    :string
+#  expiration_date   :date
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  giver_id          :integer
+#  receiver_id       :integer
+#  redeem_service_id :integer
 #
 class Coupon < ApplicationRecord
   # def service
