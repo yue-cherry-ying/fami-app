@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_162856) do
+ActiveRecord::Schema.define(version: 2020_11_18_212354) do
 
   create_table "coupons", force: :cascade do |t|
     t.integer "giver_id"
@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(version: 2020_11_17_162856) do
     t.text "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "role_id"
+    t.integer "family_id"
   end
 
   create_table "messages", force: :cascade do |t|
