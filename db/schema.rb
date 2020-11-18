@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_212354) do
+ActiveRecord::Schema.define(version: 2020_11_18_213846) do
 
   create_table "coupons", force: :cascade do |t|
     t.integer "giver_id"
@@ -23,9 +23,6 @@ ActiveRecord::Schema.define(version: 2020_11_18_212354) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "name"
-    t.string "profile_image"
-    t.text "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"

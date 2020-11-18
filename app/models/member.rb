@@ -2,15 +2,12 @@
 #
 # Table name: members
 #
-#  id            :integer          not null, primary key
-#  bio           :text
-#  name          :string
-#  profile_image :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  family_id     :integer
-#  role_id       :integer
-#  user_id       :integer
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  family_id  :integer
+#  role_id    :integer
+#  user_id    :integer
 #
 class Member < ApplicationRecord
   # def coupons
