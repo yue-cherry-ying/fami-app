@@ -1,0 +1,71 @@
+<div>
+  <div>
+    <h1>
+      Family #<%= @the_family.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/families">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_family/<%= @the_family.id %>">
+          Delete family
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Family name
+      </dt>
+      <dd>
+        <%= @the_family.family_name %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_family.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_family.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit family
+    </h2>
+
+    <form action="/modify_family/<%= @the_family.id %>"  method="post" >
+      <div>
+        <label for="family_name_box">
+          Family name
+        </label>
+
+        <input type="text" id="family_name_box" name="query_family_name" value="<%= @the_family.family_name %>">
+      </div>
+
+      <button>
+        Update family
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

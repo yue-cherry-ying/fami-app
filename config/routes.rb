@@ -1,5 +1,24 @@
 Rails.application.routes.draw do
 
+  # Routes for the Family resource:
+
+  # CREATE
+  post("/insert_family", { :controller => "families", :action => "create" })
+          
+  # READ
+  get("/families", { :controller => "families", :action => "index" })
+  
+  get("/families/:path_id", { :controller => "families", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_family/:path_id", { :controller => "families", :action => "update" })
+  
+  # DELETE
+  get("/delete_family/:path_id", { :controller => "families", :action => "destroy" })
+
+  #------------------------------
+
   get("/", { :controller => "members", :action => "index" })
 
   # Routes for the User account:

@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      List of all families
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new family
+    </h2>
+
+    <form action="/insert_family" method="post">
+      <div>
+        <label for="family_name_box">
+          Family name
+        </label>
+
+        <input type="text" id="family_name_box" name="query_family_name">
+      </div>
+
+      <button>
+        Create family
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Family name
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_families.each do |a_family| %>
+      <tr>
+        <td>
+          <%= a_family.id %>
+        </td>
+
+        <td>
+          <%= a_family.family_name %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_family.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_family.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/families/<%= a_family.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
