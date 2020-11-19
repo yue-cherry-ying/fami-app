@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Family #<%= @the_family.id %> details
+      The <%= @the_family.family_name %> Family
     </h1>
 
     <div>
@@ -10,62 +10,52 @@
           Go back
         </a>
       </div>
-
-      <div>
-        <a href="/delete_family/<%= @the_family.id %>">
-          Delete family
-        </a>
-      </div>
     </div>
-
-    <dl>
-      <dt>
-        Family name
-      </dt>
-      <dd>
-        <%= @the_family.family_name %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_family.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_family.updated_at) %> ago
-      </dd>
-    </dl>
   </div>
 </div>
 
 <hr>
 
+<table border="1">
+  <tr>
+    <th>
+      Name
+    </th>
 
-<div>
-  <div>
-    <h2>
-      Edit family
-    </h2>
+    <th>
+      Role
+    </th>
 
-    <form action="/modify_family/<%= @the_family.id %>"  method="post" >
-      <div>
-        <label for="family_name_box">
-          Family name
-        </label>
+    <th>
+      Photo
+    </th>
 
-        <input type="text" id="family_name_box" name="query_family_name" value="<%= @the_family.family_name %>">
-      </div>
+    <th>
+      Show Details
+    </th>
+  </tr>
 
-      <button>
-        Update family
-      </button>
-    </form>
-  </div>
-</div>
+  <% @the_family.members.each do |a_member| %>
+    <tr>
+      <td>
+        <%= a_member.user.first_name %>
+      </td>
+
+      <td>
+        <%= a_member.role.role %>
+      </td>
+
+      <td>
+        <img src=<%= a_member.user.profile_image %> style="width:250px;">
+      </td>
+
+      <td>
+        <a href="/members/<%= a_member.id %>">
+          Profile Details
+        </a>
+      </td>
+    </tr>
+  <% end %>
+</table>
 
 <hr>

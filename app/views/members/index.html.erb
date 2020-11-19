@@ -74,20 +74,22 @@
 
       <% @list_of_members.each do |a_member| %>
       <tr>
+
+        The <%= a_member.family.family_name %> Family
         <td>
           <%= a_member.id %>
         </td>
 
         <td>
-          <%= a_member.name %>
+          <%#= a_member.name %>
         </td>
 
         <td>
-          <img src=<%= a_member.profile_image %> style="width:250px;">
+          <img src=<%#= a_member.profile_image %> style="width:250px;">
         </td>
 
         <td>
-          <%= a_member.bio %>
+          <%#= a_member.bio %>
         </td>
 
         <td>

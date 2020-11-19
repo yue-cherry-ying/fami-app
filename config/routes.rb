@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # Routes for the Family resource:
 
   # CREATE
-  post("/insert_family", { :controller => "families", :action => "create" })
+  # post("/insert_family", { :controller => "families", :action => "create" })
           
   # READ
   get("/families", { :controller => "families", :action => "index" })
@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   
   # UPDATE
   
-  post("/modify_family/:path_id", { :controller => "families", :action => "update" })
+  # post("/modify_family/:path_id", { :controller => "families", :action => "update" })
   
   # DELETE
-  get("/delete_family/:path_id", { :controller => "families", :action => "destroy" })
+  # get("/delete_family/:path_id", { :controller => "families", :action => "destroy" })
 
   #------------------------------
 

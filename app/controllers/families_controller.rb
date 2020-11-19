@@ -6,7 +6,7 @@ class FamiliesController < ApplicationController
 
     render({ :template => "families/index.html.erb" })
   end
-
+  
   def show
     the_id = params.fetch("path_id")
 
