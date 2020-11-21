@@ -1,0 +1,180 @@
+<div>
+  <div>
+    <h1>
+      List of all chores
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new chore
+    </h2>
+
+    <form action="/insert_chore" method="post">
+      <div>
+        <label for="family_id_box">
+          Family
+        </label>
+
+        <input type="text" id="family_id_box" name="query_family_id">
+      </div>
+
+      <div>
+        <label for="role_id_box">
+          Role
+        </label>
+
+        <input type="text" id="role_id_box" name="query_role_id">
+      </div>
+
+      <div>
+        <label for="chore_name_box">
+          Chore name
+        </label>
+
+        <input type="text" id="chore_name_box" name="query_chore_name">
+      </div>
+
+      <div>
+        <label for="category_box">
+          Category
+        </label>
+
+        <input type="text" id="category_box" name="query_category">
+      </div>
+
+      <div>
+        <label for="due_date_box">
+          Due date
+        </label>
+
+        <input type="date" id="due_date_box" name="query_due_date">
+      </div>
+
+      <div>
+        <input type="checkbox" id="completed_box" name="query_completed" value="1">
+
+        <label for="completed_box">Completed</label>
+      </div>
+
+      <div>
+        <label for="coupon_id_box">
+          Coupon
+        </label>
+
+        <input type="text" id="coupon_id_box" name="query_coupon_id">
+      </div>
+
+      <button>
+        Create chore
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Family
+        </th>
+
+        <th>
+          Role
+        </th>
+
+        <th>
+          Chore name
+        </th>
+
+        <th>
+          Category
+        </th>
+
+        <th>
+          Due date
+        </th>
+
+        <th>
+          Completed
+        </th>
+
+        <th>
+          Coupon
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_chores.each do |a_chore| %>
+      <tr>
+        <td>
+          <%= a_chore.id %>
+        </td>
+
+        <td>
+          <%= a_chore.family_id %>
+        </td>
+
+        <td>
+          <%= a_chore.role_id %>
+        </td>
+
+        <td>
+          <%= a_chore.chore_name %>
+        </td>
+
+        <td>
+          <%= a_chore.category %>
+        </td>
+
+        <td>
+          <%= a_chore.due_date %>
+        </td>
+
+        <td>
+          <%= a_chore.completed %>
+        </td>
+
+        <td>
+          <%= a_chore.coupon_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_chore.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_chore.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/chores/<%= a_chore.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

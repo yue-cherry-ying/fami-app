@@ -10,16 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_013453) do
+ActiveRecord::Schema.define(version: 2020_11_21_205942) do
 
-  create_table "coupons", force: :cascade do |t|
-    t.integer "giver_id"
-    t.integer "receiver_id"
+  create_table "chores", force: :cascade do |t|
+    t.integer "family_id"
+    t.integer "role_id"
+    t.string "chore_name"
+    t.string "category"
+    t.date "due_date"
+    t.boolean "completed"
+    t.integer "coupon_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.integer "chore_id"
+    t.boolean "redeemed"
+    t.integer "receiver_id"
+    t.integer "giver_id"
     t.string "coupon_content"
     t.date "expiration_date"
-    t.integer "redeem_service_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "families", force: :cascade do |t|

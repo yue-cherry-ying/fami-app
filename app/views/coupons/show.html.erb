@@ -20,10 +20,17 @@
 
     <dl>
       <dt>
-        Giver
+        Chore
       </dt>
       <dd>
-        <%= @the_coupon.giver_id %>
+        <%= @the_coupon.chore_id %>
+      </dd>
+
+      <dt>
+        Redeemed
+      </dt>
+      <dd>
+        <%= @the_coupon.redeemed %>
       </dd>
 
       <dt>
@@ -31,6 +38,27 @@
       </dt>
       <dd>
         <%= @the_coupon.receiver_id %>
+      </dd>
+
+      <dt>
+        Giver
+      </dt>
+      <dd>
+        <%= @the_coupon.giver_id %>
+      </dd>
+
+      <dt>
+        Coupon content
+      </dt>
+      <dd>
+        <%= @the_coupon.coupon_content %>
+      </dd>
+
+      <dt>
+        Expiration date
+      </dt>
+      <dd>
+        <%= @the_coupon.expiration_date %>
       </dd>
 
       <dt>
@@ -61,11 +89,19 @@
 
     <form action="/modify_coupon/<%= @the_coupon.id %>"  method="post" >
       <div>
-        <label for="giver_id_box">
-          Giver
+        <label for="chore_id_box">
+          Chore
         </label>
 
-        <input type="text" id="giver_id_box" name="query_giver_id" value="<%= @the_coupon.giver_id %>">
+        <input type="text" id="chore_id_box" name="query_chore_id" value="<%= @the_coupon.chore_id %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="redeemed_box" name="query_redeemed" value="1" <%= "checked" if @the_coupon.redeemed %>>
+
+        <label for="redeemed_box">
+            Redeemed
+        </label>
       </div>
 
       <div>
@@ -74,6 +110,30 @@
         </label>
 
         <input type="text" id="receiver_id_box" name="query_receiver_id" value="<%= @the_coupon.receiver_id %>">
+      </div>
+
+      <div>
+        <label for="giver_id_box">
+          Giver
+        </label>
+
+        <input type="text" id="giver_id_box" name="query_giver_id" value="<%= @the_coupon.giver_id %>">
+      </div>
+
+      <div>
+        <label for="coupon_content_box">
+          Coupon content
+        </label>
+
+        <input type="text" id="coupon_content_box" name="query_coupon_content" value="<%= @the_coupon.coupon_content %>">
+      </div>
+
+      <div>
+        <label for="expiration_date_box">
+          Expiration date
+        </label>
+
+        <input type="date" id="expiration_date_box" name="query_expiration_date" value="<%= @the_coupon.expiration_date %>">
       </div>
 
       <button>

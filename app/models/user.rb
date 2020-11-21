@@ -18,5 +18,5 @@ class User < ApplicationRecord
   has_secure_password
   has_many(:members, { :class_name => "Member", :foreign_key => "user_id", :dependent => :destroy })
   has_many(:coupons, { :class_name => "Coupon", :foreign_key => "receiver_id", :dependent => :destroy })
-  has_many(:services, { :through => :coupons, :source => :service })
+  has_many(:chores, { :through => :coupons, :source => :chore })
 end

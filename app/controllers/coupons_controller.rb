@@ -19,8 +19,12 @@ class CouponsController < ApplicationController
 
   def create
     the_coupon = Coupon.new
-    the_coupon.giver_id = params.fetch("query_giver_id")
+    the_coupon.chore_id = params.fetch("query_chore_id")
+    the_coupon.redeemed = params.fetch("query_redeemed", false)
     the_coupon.receiver_id = params.fetch("query_receiver_id")
+    the_coupon.giver_id = params.fetch("query_giver_id")
+    the_coupon.coupon_content = params.fetch("query_coupon_content")
+    the_coupon.expiration_date = params.fetch("query_expiration_date")
 
     if the_coupon.valid?
       the_coupon.save
@@ -34,8 +38,12 @@ class CouponsController < ApplicationController
     the_id = params.fetch("path_id")
     the_coupon = Coupon.where({ :id => the_id }).at(0)
 
-    the_coupon.giver_id = params.fetch("query_giver_id")
+    the_coupon.chore_id = params.fetch("query_chore_id")
+    the_coupon.redeemed = params.fetch("query_redeemed", false)
     the_coupon.receiver_id = params.fetch("query_receiver_id")
+    the_coupon.giver_id = params.fetch("query_giver_id")
+    the_coupon.coupon_content = params.fetch("query_coupon_content")
+    the_coupon.expiration_date = params.fetch("query_expiration_date")
 
     if the_coupon.valid?
       the_coupon.save

@@ -1,5 +1,43 @@
 Rails.application.routes.draw do
 
+  # Routes for the Chore resource:
+
+  # CREATE
+  post("/insert_chore", { :controller => "chores", :action => "create" })
+          
+  # READ
+  get("/chores", { :controller => "chores", :action => "index" })
+  
+  get("/chores/:path_id", { :controller => "chores", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_chore/:path_id", { :controller => "chores", :action => "update" })
+  
+  # DELETE
+  get("/delete_chore/:path_id", { :controller => "chores", :action => "destroy" })
+
+  #------------------------------
+
+  # Routes for the Coupon resource:
+
+  # CREATE
+  post("/insert_coupon", { :controller => "coupons", :action => "create" })
+          
+  # READ
+  get("/coupons", { :controller => "coupons", :action => "index" })
+  
+  get("/coupons/:path_id", { :controller => "coupons", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_coupon/:path_id", { :controller => "coupons", :action => "update" })
+  
+  # DELETE
+  get("/delete_coupon/:path_id", { :controller => "coupons", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Family resource:
 
   # CREATE
@@ -64,25 +102,6 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_message/:path_id", { :controller => "messages", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the Coupon resource:
-
-  # CREATE
-  post("/insert_coupon", { :controller => "coupons", :action => "create" })
-          
-  # READ
-  get("/coupons", { :controller => "coupons", :action => "index" })
-  
-  get("/coupons/:path_id", { :controller => "coupons", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_coupon/:path_id", { :controller => "coupons", :action => "update" })
-  
-  # DELETE
-  get("/delete_coupon/:path_id", { :controller => "coupons", :action => "destroy" })
 
   #------------------------------
 

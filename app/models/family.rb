@@ -9,5 +9,5 @@
 #
 class Family < ApplicationRecord
   has_many(:members, { :class_name => "Member", :foreign_key => "family_id", :dependent => :destroy })
-  has_many(:services, { :class_name => "Service", :foreign_key => "family_id", :dependent => :destroy })
+  has_many(:chores, { :class_name => "Chore", :foreign_key => "family_id", :dependent => :destroy })
 end

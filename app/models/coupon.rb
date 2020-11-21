@@ -2,41 +2,18 @@
 #
 # Table name: coupons
 #
-#  id                :integer          not null, primary key
-#  coupon_content    :string
-#  expiration_date   :date
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  giver_id          :integer
-#  receiver_id       :integer
-#  redeem_service_id :integer
+#  id              :integer          not null, primary key
+#  coupon_content  :string
+#  expiration_date :date
+#  redeemed        :boolean
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  chore_id        :integer
+#  giver_id        :integer
+#  receiver_id     :integer
 #
 class Coupon < ApplicationRecord
-  # def service
-    # my_service_id = self.redeem_service_id
-
-    # matching_services = Service.where({ :id => my_service_id })
-
-    # the_service = matching_services.at(0)
-
-    # return the_service
-  # end
-  belongs_to(:service, {
-    :class_name => "Service",
-    :foreign_key => "redeem_service_id"
-  })
-
-  # def member
-    # coupon_giver_id = self.giver_id
-
-    # matching_members = Member.where({ :id => coupon_giver_id })
-
-    # the_member = matching_members.at(0)
-
-    # return the_member
-  # end
-  belongs_to(:member, {
-    :class_name => "Member",
-    :foreign_key => "giver_id"
-  })
+  belongs_to(:receiver, { :required => false, :class_name => "User", :foreign_key => "receiver_id" })
+  belongs_to(:chore, { :required => false, :class_name => "Chore", :foreign_key => "chore_id" })
+  has_many(:chores, { :class_name => "Chore", :foreign_key => "coupon_id", :dependent => :destroy })
 end
