@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
   def index
-    matching_members = Member.all
+    matching_family = Family.where({ :family_name => @current_user.last_name }).at(0)
+    matching_members = Member.where({ :family_id => matching_family.id })
 
     @list_of_members = matching_members.order({ :created_at => :desc })
 

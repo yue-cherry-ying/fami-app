@@ -1,63 +1,30 @@
 <div>
   <div>
     <h1>
-      Our Loving Family!
+      The <%= @current_user.last_name %> Family
       <%# List of all family members %>
     </h1>
+    <p>
+      [Being a FAMIly means you are part of something very wonderful. It means you will love and be loved for the rest of your life. No matter what.]
+    </p>
   </div>
 </div>
 
 <hr>
 
-<div>
-  <div>
-    <h2>
-      + Add a new member of the family
-    </h2>
-
-    <form action="/insert_member" method="post">
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name" placeholder="Enter the family member name (indicate family relationship, if applicable)">
-      </div>
-
-      <div>
-        <label for="profile_image_box">
-          Profile image
-        </label>
-
-        <input type="text" id="profile_image_box" name="query_profile_image" placeholder="Enter a URL for the image...">
-      </div>
-
-      <div>
-        <label for="bio_box">
-          Bio
-        </label>
-
-        <textarea id="bio_box" name="query_bio" rows="3" placeholder="Enter something that represents or inspires the member..."></textarea>
-      </div>
-
-      <button>
-        Create member
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
 <div>
   <div>
     <table border="1">
       <tr>
-        <th>
+        <%# <th>
           ID
+        </th> %>
+        <th>
+          Name
         </th>
 
         <th>
-          Name
+          Role
         </th>
 
         <th>
@@ -74,27 +41,25 @@
 
       <% @list_of_members.each do |a_member| %>
       <tr>
-
-        The <%= a_member.family.family_name %> Family
         <td>
-          <%= a_member.id %>
+          <%= a_member.user.first_name %>
         </td>
 
         <td>
-          <%#= a_member.name %>
+          <%= a_member.role.role %>
         </td>
 
         <td>
-          <img src=<%#= a_member.profile_image %> style="width:250px;">
+          <img src=<%= a_member.user.profile_image %> style="width:250px;">
         </td>
 
         <td>
-          <%#= a_member.bio %>
+          <%= a_member.user.bio %>
         </td>
 
         <td>
           <a href="/members/<%= a_member.id %>">
-            Show details
+            More Information
           </a>
         </td>
       </tr>
