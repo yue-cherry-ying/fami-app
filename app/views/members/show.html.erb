@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Profile for <%= @the_member.name %>
+      Profile for <%= @the_member.user.first_name %> <%= @the_member.user.last_name %>
     </h1>
 
     <div>
@@ -25,21 +25,21 @@
         Name
       </dt>
       <dd>
-        <%= @the_member.name %>
+        <%= @the_member.user.first_name %> <%= @the_member.user.last_name %>
       </dd>
 
       <dt>
         Profile image
       </dt>
       <dd>
-        <img src=<%= @the_member.profile_image %> style="width:250px;">
+        <img src=<%= @the_member.user.profile_image %> style="width:250px;">
       </dd>
 
       <dt>
         Bio
       </dt>
       <dd>
-        <%= @the_member.bio %>
+        <%= @the_member.user.bio %>
       </dd>
 
     </dl>
@@ -90,39 +90,41 @@
 
 <div>
   <div>
-    <h2>
-      Edit member
-    </h2>
+    <% if @current_user.id == @the_member.user_id %>
+      <h2>
+        Edit member
+      </h2>
 
-    <form action="/modify_member/<%= @the_member.id %>"  method="post" >
-      <div>
-        <label for="name_box">
-          Name
-        </label>
+      <form action="/modify_member/<%= @the_member.id %>"  method="post" >
+        <div>
+          <label for="name_box">
+            Name
+          </label>
 
-        <input type="text" id="name_box" name="query_name" value="<%= @the_member.name %>">
-      </div>
+          <input type="text" id="name_box" name="query_name" value="<%= @the_member.user.first_name %>">
+        </div>
 
-      <div>
-        <label for="profile_image_box">
-          Profile image
-        </label>
+        <div>
+          <label for="profile_image_box">
+            Profile image
+          </label>
 
-        <input type="text" id="profile_image_box" name="query_profile_image" value="<%= @the_member.profile_image %>">
-      </div>
+          <input type="text" id="profile_image_box" name="query_profile_image" value="<%= @the_member.user.profile_image %>">
+        </div>
 
-      <div>
-        <label for="bio_box">
-          Bio
-        </label>
+        <div>
+          <label for="bio_box">
+            Bio
+          </label>
 
-        <textarea id="bio_box" name="query_bio"><%= @the_member.bio %></textarea>
-      </div>
+          <textarea id="bio_box" name="query_bio"><%= @the_member.user.bio %></textarea>
+        </div>
 
-      <button>
-        Update member
-      </button>
-    </form>
+        <button>
+          Update member
+        </button>
+      </form>
+    <% end %>
   </div>
 </div>
 
