@@ -16,4 +16,7 @@ class User < ApplicationRecord
   validates :email, :uniqueness => { :case_sensitive => false }
   validates :email, :presence => true
   has_secure_password
+  has_many(:members, { :class_name => "Member", :foreign_key => "user_id", :dependent => :destroy })
+  has_many(:coupons, { :class_name => "Coupon", :foreign_key => "receiver_id", :dependent => :destroy })
+  has_many(:services, { :through => :coupons, :source => :service })
 end

@@ -8,15 +8,6 @@
 #  updated_at  :datetime         not null
 #
 class Family < ApplicationRecord
-  # def members
-    # my_family_id = self.id
-
-    # matching_members = Member.where({ :family_id => my_family_id })
-
-    # return matching_members
-  # end
-  has_many(:members, {
-    :class_name => "Member",
-    :foreign_key => "family_id"
-  })
+  has_many(:members, { :class_name => "Member", :foreign_key => "family_id", :dependent => :destroy })
+  has_many(:services, { :class_name => "Service", :foreign_key => "family_id", :dependent => :destroy })
 end

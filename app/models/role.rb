@@ -8,5 +8,6 @@
 #  updated_at :datetime         not null
 #
 class Role < ApplicationRecord
-  
+  has_many(:members, { :class_name => "Member", :foreign_key => "role_id", :dependent => :destroy })
+  has_many(:services, { :class_name => "Service", :foreign_key => "role_id", :dependent => :destroy })
 end
