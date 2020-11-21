@@ -15,17 +15,14 @@
             Resources
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href="/messages" class="dropdown-item">
-              Messages
+            <a href="/chores" class="dropdown-item">
+              Chores
             </a>
             <a href="/coupons" class="dropdown-item">
-              Coupons
+              My Coupons
             </a>
             <a href="/members" class="dropdown-item">
-              Members
-            </a>
-            <a href="/services" class="dropdown-item">
-              Services
+              My Families
             </a>
           </div>
         </li>
@@ -34,8 +31,8 @@
             <a href="/user_sign_out" class="nav-link">Sign Out</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link disabled">
-              <%= session.fetch(:user_id) %>
+            <a href="/edit_user_profile" class="nav-link">
+              Edit <%= @current_user.first_name %>'s Account
             </a>
           </li>
         <% else %>

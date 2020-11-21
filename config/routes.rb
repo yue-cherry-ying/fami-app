@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get("/", { :controller => "members", :action => "index" })
+
   # Routes for the Chore resource:
 
   # CREATE
@@ -56,8 +58,6 @@ Rails.application.routes.draw do
   # get("/delete_family/:path_id", { :controller => "families", :action => "destroy" })
 
   #------------------------------
-
-  get("/", { :controller => "members", :action => "index" })
 
   # Routes for the User account:
 
