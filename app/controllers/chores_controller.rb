@@ -1,4 +1,8 @@
 class ChoresController < ApplicationController
+  def categories
+    render({ :template => "chores/category.html.erb" })
+  end 
+
   def index
     matching_chores = Chore.all
 

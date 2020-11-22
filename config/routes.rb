@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   post("/insert_chore", { :controller => "chores", :action => "create" })
           
   # READ
+  get("/chore_list", { :controller => "chores", :action => "categories" })
+
   get("/chores", { :controller => "chores", :action => "index" })
   
   get("/chores/:path_id", { :controller => "chores", :action => "show" })
