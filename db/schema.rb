@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_21_205942) do
+ActiveRecord::Schema.define(version: 2020_11_22_160127) do
 
   create_table "chores", force: :cascade do |t|
     t.integer "family_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_11_21_205942) do
     t.integer "coupon_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "chore_image"
   end
 
   create_table "coupons", force: :cascade do |t|
