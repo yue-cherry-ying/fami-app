@@ -1,8 +1,11 @@
 <div>
   <div>
     <h1>
-      ALL CHORES CATEGORIES
+      Chores FOR Rewards
     </h1>
+    <p>
+      I'm not doing chores for others, I'm doing it because we can have a clean, healthy, and happy home.
+    </p>
   </div>
 </div>
 
@@ -10,25 +13,30 @@
 
 <div>
   <div>
-    <h2>
-      Add a new chore
-    </h2>
+    <h3>
+      + Add a Chore
+    </h3>
 
     <form action="/insert_chore" method="post">
       <div>
-        <label for="family_id_box">
+        <%# <label for="family_id_box">
           Family
-        </label>
+        </label> %>
 
-        <input type="text" id="family_id_box" name="query_family_id">
+        <input type="hidden" id="family_id_box" name="query_family_id">
       </div>
 
       <div>
-        <label for="role_id_box">
-          Role
+        <label for="role_box">
+          Receipient
         </label>
 
-        <input type="text" id="role_id_box" name="query_role_id">
+        <select id="role_box" name="query_role" placeholder="For whom are you completing the chore?">
+          <option value="Mom">Mom</option>
+          <option value="Dad">Dad</option>
+          <option value="Grandma">Grandma</option>
+          <option value="Grandpa">Grandpa</option>
+        </select>
       </div>
 
       <div>
@@ -36,7 +44,15 @@
           Chore name
         </label>
 
-        <input type="text" id="chore_name_box" name="query_chore_name">
+        <input type="text" id="chore_name_box" name="query_chore_name" placeholder="Enter a chore name">
+      </div>
+
+      <div>
+        <label for="image_box">
+          Image
+        </label>
+
+        <input type="text" id="image_box" name="query_image" placeholder="Enter a URL for the image...">
       </div>
 
       <div>
@@ -44,7 +60,12 @@
           Category
         </label>
 
-        <input type="text" id="category_box" name="query_category">
+        <select id="category_box" name="query_category" placeholder="Choose a category from the list">
+          <option value="Washing">Washing</option>
+          <option value="Cooking">Cooking</option>
+          <option value="Cleaning">Cleaning</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
 
       <div>
@@ -52,7 +73,7 @@
           Due date
         </label>
 
-        <input type="date" id="due_date_box" name="query_due_date">
+        <input type="date" id="due_date_box" name="query_due_date" placeholder="Enter the due date of the chore...">
       </div>
 
       <div>
@@ -62,15 +83,15 @@
       </div>
 
       <div>
-        <label for="coupon_id_box">
+        <%# <label for="coupon_id_box">
           Coupon
-        </label>
+        </label> %>
 
-        <input type="text" id="coupon_id_box" name="query_coupon_id">
+        <input type="hidden" id="coupon_id_box" name="query_coupon_id">
       </div>
 
       <button>
-        Create chore
+        Create Chore
       </button>
     </form>
   </div>
@@ -82,19 +103,15 @@
     <table>
       <tr>
         <th>
-          ID
-        </th>
-
-        <th>
-          Family
-        </th>
-
-        <th>
-          Role
+          Receipient
         </th>
 
         <th>
           Chore name
+        </th>
+
+        <th>
+          Image
         </th>
 
         <th>
@@ -114,33 +131,21 @@
         </th>
 
         <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
         </th>
       </tr>
 
       <% @list_of_chores.each do |a_chore| %>
       <tr>
         <td>
-          <%= a_chore.id %>
-        </td>
-
-        <td>
-          <%= a_chore.family_id %>
-        </td>
-
-        <td>
-          <%= a_chore.role_id %>
+          <%= a_chore.role.role %>
         </td>
 
         <td>
           <%= a_chore.chore_name %>
+        </td>
+
+        <td>
+          <img src=<%= a_chore.chore_image %> style="width:250px;">
         </td>
 
         <td>
@@ -152,25 +157,19 @@
         </td>
 
         <td>
-          <%= a_chore.completed %>
+          <% if a_chore.completed %>
+            <%= check_box_tag "", "yes", true %>
+            <%= label_tag "" %>
+          <% else %>
+            <%= check_box_tag "", "yes", false %>
+            <%= label_tag "" %>
+          <% end %>
         </td>
 
         <td>
-          <%= a_chore.coupon_id %>
+          <%#= a_chore.coupon.coupon_content %>
         </td>
 
-        <td>
-          <%= time_ago_in_words(a_chore.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_chore.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/chores/<%= a_chore.id %>">
-            Show details
-          </a>
-        </td>
       </tr>
       <% end %>
     </table>

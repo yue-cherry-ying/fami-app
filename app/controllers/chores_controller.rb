@@ -23,13 +23,18 @@ class ChoresController < ApplicationController
 
   def create
     the_chore = Chore.new
-    the_chore.family_id = params.fetch("query_family_id")
-    the_chore.role_id = params.fetch("query_role_id")
+    # the_chore.family_id = params.fetch("query_family_id")
+    the_chore.family_id = Family.where({ :family_name => @current_user.last_name }).at(0).id
+    # the_chore.family_id = @current_user.member.family_id
+    the_chore.role_id = Role.where({ :role => params.fetch("query_role") }).at(0).id
     the_chore.chore_name = params.fetch("query_chore_name")
     the_chore.category = params.fetch("query_category")
+    the_chore.chore_image = params.fetch("query_image")
     the_chore.due_date = params.fetch("query_due_date")
     the_chore.completed = params.fetch("query_completed", false)
-    the_chore.coupon_id = params.fetch("query_coupon_id")
+    # the_chore.coupon_id = params.fetch("query_coupon_id")
+    # the_chore.coupon_id = Coupon.where({ :receiver_id => @current_user.id }).at(0).id
+    the_chore.coupon_id = the_chore.id
 
     if the_chore.valid?
       the_chore.save

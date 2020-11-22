@@ -1,13 +1,13 @@
 body {
-    padding-top: 64px;
+    padding-top: 20px;
     font-family: "Montserrat";
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
-.navbar-brand {
+/* .navbar-brand {
     font-family: "Passion One";
-}
+} */
 .who-delivers {
     background: url(/assets/images/main-hero.jpg) no-repeat center center;
     background-size: cover;
