@@ -59,7 +59,11 @@
 
         <td>
           <a href="/members/<%= a_member.id %>">
-            More Information
+            <% if @current_user.id == a_member.user_id %>
+              My Profile
+            <% else %>
+              More Information
+            <% end %>
           </a>
         </td>
       </tr>
