@@ -158,17 +158,27 @@
 
         <td>
           <% if a_chore.completed %>
-            <%= check_box_tag "", "yes", true %>
-            <%= label_tag "" %>
+            Completed
+            <%#= check_box_tag "", "yes", true %>
+            <%#= label_tag "" %>
           <% else %>
-            <%= check_box_tag "", "yes", false %>
-            <%= label_tag "" %>
+            Not Completed
+            <%#= check_box_tag "", "yes", false %>
+            <%#= label_tag "" %>
           <% end %>
         </td>
 
         <td>
           <%#= a_chore.coupon.coupon_content %>
         </td>
+
+        <td>
+          <% if a_chore.completed == false %>
+            <a href="/chores"> Change Completion Status <a>
+            <% a_chore.completed == true %>
+          <% end %>
+        </td>
+
 
       </tr>
       <% end %>
