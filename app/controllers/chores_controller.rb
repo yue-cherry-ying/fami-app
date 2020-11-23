@@ -21,6 +21,14 @@ class ChoresController < ApplicationController
     render({ :template => "chores/show.html.erb" })
   end
 
+  def complete
+    the_id = params.fetch("path_id")
+    matching_chore = Chore.where({ :id => the_id }).at(0)
+    matching_chore.completed = true
+    matching_chore.save
+    redirect_to("/chores", :notice => "Successfully changed the completion status of the chore.")
+  end
+
   def create
     the_chore = Chore.new
     # the_chore.family_id = params.fetch("query_family_id")

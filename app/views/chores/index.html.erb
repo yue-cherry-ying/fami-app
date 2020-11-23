@@ -174,8 +174,14 @@
 
         <td>
           <% if a_chore.completed == false %>
-            <a href="/chores"> Change Completion Status <a>
-            <% a_chore.completed == true %>
+            <form action="/complete_chore/<%= a_chore.id %>">
+              <select id="family_members" name="query_member_id" placeholder="Choose a family member from the list">
+                <%= a_chore.family.members.each do |member| %>
+                  <option value=member.user_id><%= member.user.first_name %></option>
+                <% end %>
+              </select>
+            <a href="/complete_chore/<%= a_chore.id %>"> Change Completion Status <a>
+            </form>
           <% end %>
         </td>
 
