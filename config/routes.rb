@@ -126,23 +126,4 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-  # Routes for the Service resource:
-
-  # CREATE
-  post("/insert_service", { :controller => "services", :action => "create" })
-          
-  # READ
-  get("/services", { :controller => "services", :action => "index" })
-  
-  get("/services/:path_id", { :controller => "services", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_service/:path_id", { :controller => "services", :action => "update" })
-  
-  # DELETE
-  get("/delete_service/:path_id", { :controller => "services", :action => "destroy" })
-
-  #------------------------------
-
 end
