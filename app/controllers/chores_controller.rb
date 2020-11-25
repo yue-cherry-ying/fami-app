@@ -8,6 +8,10 @@ class ChoresController < ApplicationController
 
     @list_of_chores = matching_chores.order({ :created_at => :desc })
 
+    matching_users = User.all
+
+    @list_of_users = matching_users.order( :created_at => :desc )
+
     render({ :template => "chores/index.html.erb" })
   end
 

@@ -21,21 +21,30 @@
         </h3>
         <form action="/insert_chore" method="post">
           <div>
-            <%# <label for="family_id_box">
-                Family
-              </label> %>
             <input type="hidden" id="family_id_box" name="query_family_id">
           </div>
           <div>
             <label for="role_box">
-              Receipient
+              Which kid is going to complete the chore?
             </label>
-            <select id="role_box" name="query_role" placeholder="For whom are you completing the chore?">
-              <option value="Mom">Mom</option>
-              <option value="Dad">Dad</option>
-              <option value="Grandma">Grandma</option>
-              <option value="Grandpa">Grandpa</option>
+            <select id="role_box" name="query_role" placeholder="Which kid is going to complete the chore?">
+              <% @list_of_users.each do |user| %>
+                <% if user.last_name == @current_user.last_name %>
+                  <% matching_role_id = Member.where({ :user_id => user.id }).at(0).role_id %>
+                  <% matching_role = Role.where({ :id => matching_role_id }).at(0).role %>
+                  <% if matching_role == "Son" %>
+                    <option value=matching_role_id><%= user.first_name %></option>
+                  <% elsif matching_role == "Daughter" %>
+                    <option value=matching_role_id><%= user.first_name %></option>
+                  <% end %>
+                <% end %>
+              <% end %>
             </select>
+              <%# <option value="Mom">Mom</option> %>
+              <%# <option value="Dad">Dad</option> %>
+              <%# <option value="Grandma">Grandma</option> %>
+              <%# <option value="Grandpa">Grandpa</option> %>
+            <%# </select> %>
           </div>
           <div>
             <label for="chore_name_box">
