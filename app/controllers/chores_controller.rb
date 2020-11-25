@@ -38,7 +38,10 @@ class ChoresController < ApplicationController
     # the_chore.family_id = params.fetch("query_family_id")
     the_chore.family_id = Family.where({ :family_name => @current_user.last_name }).at(0).id
     # the_chore.family_id = @current_user.member.family_id
-    the_chore.role_id = Role.where({ :role => params.fetch("query_role") }).at(0).id
+    # the_chore.role_id = Role.where({ :role => params.fetch("query_role") }).at(0).id
+    the_chore.role_id = params.fetch("query_role")
+    the_chore.giver_id = @current_user.id
+    the_chore.receiver_id = params.fetch("query_receiver_id")
     the_chore.chore_name = params.fetch("query_chore_name")
     the_chore.category = params.fetch("query_category")
     the_chore.chore_image = params.fetch("query_image")
