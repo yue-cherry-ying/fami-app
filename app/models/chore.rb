@@ -12,6 +12,8 @@
 #  updated_at  :datetime         not null
 #  coupon_id   :integer
 #  family_id   :integer
+#  giver_id    :integer
+#  receiver_id :integer
 #  role_id     :integer
 #
 class Chore < ApplicationRecord
