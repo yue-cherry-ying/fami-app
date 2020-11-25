@@ -8,95 +8,81 @@
     </p>
   </div>
 </div>
-
 <hr>
-
 <div>
   <div>
-    <h3>
-      + Add a Chore
-    </h3>
-
-    <form action="/insert_chore" method="post">
-      <div>
-        <%# <label for="family_id_box">
-          Family
-        </label> %>
-
-        <input type="hidden" id="family_id_box" name="query_family_id">
-      </div>
-
-      <div>
-        <label for="role_box">
-          Receipient
-        </label>
-
-        <select id="role_box" name="query_role" placeholder="For whom are you completing the chore?">
-          <option value="Mom">Mom</option>
-          <option value="Dad">Dad</option>
-          <option value="Grandma">Grandma</option>
-          <option value="Grandpa">Grandpa</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="chore_name_box">
-          Chore name
-        </label>
-
-        <input type="text" id="chore_name_box" name="query_chore_name" placeholder="Enter a chore name">
-      </div>
-
-      <div>
-        <label for="image_box">
-          Image
-        </label>
-
-        <input type="text" id="image_box" name="query_image" placeholder="Enter a URL for the image...">
-      </div>
-
-      <div>
-        <label for="category_box">
-          Category
-        </label>
-
-        <select id="category_box" name="query_category" placeholder="Choose a category from the list">
-          <option value="Washing">Washing</option>
-          <option value="Cooking">Cooking</option>
-          <option value="Cleaning">Cleaning</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="due_date_box">
-          Due date
-        </label>
-
-        <input type="date" id="due_date_box" name="query_due_date" placeholder="Enter the due date of the chore...">
-      </div>
-
-      <div>
-        <input type="checkbox" id="completed_box" name="query_completed" value="1">
-
-        <label for="completed_box">Completed</label>
-      </div>
-
-      <div>
-        <%# <label for="coupon_id_box">
-          Coupon
-        </label> %>
-
-        <input type="hidden" id="coupon_id_box" name="query_coupon_id">
-      </div>
-
-      <button>
-        Create Chore
-      </button>
-    </form>
+    <% matching_family_id = Family.where({ :family_name => @current_user.last_name }).at(0).id %>
+    <% matching_role_id = Member.where({ :family_id => matching_family_id }).at(0).role_id %>
+    <% matching_role = Role.where({ :id => matching_role_id }).at(0).role %>
+    <% if matching_role == "Mom"  or "Dad" or "Grandma" or "Grandpa"%>
+      <%= matching_role %>
+      <h3>
+        + Add a Chore
+      </h3>
+      <form action="/insert_chore" method="post">
+        <div>
+          <%# <label for="family_id_box">
+              Family
+            </label> %>
+          <input type="hidden" id="family_id_box" name="query_family_id">
+        </div>
+        <div>
+          <label for="role_box">
+            Receipient
+          </label>
+          <select id="role_box" name="query_role" placeholder="For whom are you completing the chore?">
+            <option value="Mom">Mom</option>
+            <option value="Dad">Dad</option>
+            <option value="Grandma">Grandma</option>
+            <option value="Grandpa">Grandpa</option>
+          </select>
+        </div>
+        <div>
+          <label for="chore_name_box">
+            Chore name
+          </label>
+          <input type="text" id="chore_name_box" name="query_chore_name" placeholder="Enter a chore name">
+        </div>
+        <div>
+          <label for="image_box">
+            Image
+          </label>
+          <input type="text" id="image_box" name="query_image" placeholder="Enter a URL for the image...">
+        </div>
+        <div>
+          <label for="category_box">
+            Category
+          </label>
+          <select id="category_box" name="query_category" placeholder="Choose a category from the list">
+            <option value="Washing">Washing</option>
+            <option value="Cooking">Cooking</option>
+            <option value="Cleaning">Cleaning</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="due_date_box">
+            Due date
+          </label>
+          <input type="date" id="due_date_box" name="query_due_date" placeholder="Enter the due date of the chore...">
+        </div>
+        <div>
+          <input type="checkbox" id="completed_box" name="query_completed" value="1">
+          <label for="completed_box">Completed</label>
+        </div>
+        <div>
+          <%# <label for="coupon_id_box">
+              Coupon
+            </label> %>
+          <input type="hidden" id="coupon_id_box" name="query_coupon_id">
+        </div>
+        <button>
+          Create Chore
+        </button>
+      </form>
+    <% end %>
   </div>
 </div>
-
 <hr>
 <div>
   <div>
@@ -105,91 +91,78 @@
         <th>
           Receipient
         </th>
-
         <th>
           Chore name
         </th>
-
         <th>
           Image
         </th>
-
         <th>
           Category
         </th>
-
         <th>
           Due date
         </th>
-
         <th>
-          Completed
+          Status
         </th>
-
         <th>
           Coupon
         </th>
-
+        <th>
+          Completed By
+        </th>
         <th>
         </th>
       </tr>
-
       <% @list_of_chores.each do |a_chore| %>
-      <tr>
-        <td>
-          <%= a_chore.role.role %>
-        </td>
-
-        <td>
-          <%= a_chore.chore_name %>
-        </td>
-
-        <td>
-          <img src=<%= a_chore.chore_image %> style="width:250px;">
-        </td>
-
-        <td>
-          <%= a_chore.category %>
-        </td>
-
-        <td>
-          <%= a_chore.due_date %>
-        </td>
-
-        <td>
-          <% if a_chore.completed %>
-            Completed
-            <%#= check_box_tag "", "yes", true %>
-            <%#= label_tag "" %>
-          <% else %>
-            Not Completed
-            <%#= check_box_tag "", "yes", false %>
-            <%#= label_tag "" %>
-          <% end %>
-        </td>
-
-        <td>
-          <%#= a_chore.coupon.coupon_content %>
-        </td>
-
-        <td>
-          <% if a_chore.completed == false %>
-            <form action="/complete_chore/<%= a_chore.id %>">
-              <select id="family_members" name="query_member_id" placeholder="Choose a family member from the list">
-                <%= a_chore.family.members.each do |member| %>
-                  <option value=member.user_id><%= member.user.first_name %></option>
-                <% end %>
-              </select>
+        <tr>
+          <td>
+            <%= a_chore.role.role %>
+          </td>
+          <td>
+            <%= a_chore.chore_name %>
+          </td>
+          <td>
+            <img src=<%= a_chore.chore_image %> style="width:250px;">
+          </td>
+          <td>
+            <%= a_chore.category %>
+          </td>
+          <td>
+            <%= a_chore.due_date %>
+          </td>
+          <td>
+            <% if a_chore.completed %>
+              Completed
+              <%#= check_box_tag "", "yes", true %>
+              <%#= label_tag "" %>
+            <% else %>
+              Not Completed
+              <%#= check_box_tag "", "yes", false %>
+              <%#= label_tag "" %>
+            <% end %>
+          </td>
+          <td>
+            <%#= a_chore.coupon.coupon_content %>
+          </td>
+          <td>
+            <% if a_chore.completed == false %>
+              <form action="/complete_chore/<%= a_chore.id %>">
+                <select id="family_members" name="query_member_id" placeholder="Choose a family member from the list">
+                  <%= a_chore.family.members.each do |member| %>
+                    <option value=member.user_id><%= member.user.first_name %> (<%= member.role.role %>)</option>
+                  <% end %>
+                </select>
+              </form>
+            <% end %>
+          </td>
+          <td>
             <a href="/complete_chore/<%= a_chore.id %>"> Change Completion Status <a>
-            </form>
+              </td>
+            </tr>
           <% end %>
-        </td>
-
-
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>
+        </table>
+      </div>
+    </div>
+    <hr>
