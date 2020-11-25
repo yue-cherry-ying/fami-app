@@ -14,7 +14,6 @@
 #  family_id   :integer
 #  giver_id    :integer
 #  receiver_id :integer
-#  role_id     :integer
 #
 class Chore < ApplicationRecord
   belongs_to(:family, { :required => false, :class_name => "Family", :foreign_key => "family_id" })

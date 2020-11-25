@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_25_174926) do
+ActiveRecord::Schema.define(version: 2020_11_25_185819) do
 
   create_table "chores", force: :cascade do |t|
     t.integer "family_id"
-    t.integer "role_id"
     t.string "chore_name"
     t.string "category"
     t.date "due_date"
