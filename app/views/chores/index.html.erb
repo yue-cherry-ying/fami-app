@@ -98,7 +98,7 @@
     <table>
       <tr>
         <th>
-          Receipient
+          Complete By (kid)
         </th>
         <th>
           Chore name
@@ -127,7 +127,7 @@
       <% @list_of_chores.each do |a_chore| %>
         <tr>
           <td>
-            <%#= a_chore.role.role %>
+            <%= User.where({ :id => a_chore.receiver_id }).at(0).first_name %>
           </td>
           <td>
             <%= a_chore.chore_name %>
