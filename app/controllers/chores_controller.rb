@@ -40,7 +40,7 @@ class ChoresController < ApplicationController
     matching_chore.coupon_id = the_coupon.id
     matching_chore.save
 
-    redirect_to("/chores", :notice => "Successfully changed the completion status of the chore.")
+    redirect_to("/chores", :notice => "Now that a chore is completed, keep motivating your kids with some rewards!")
   end
 
   def create
