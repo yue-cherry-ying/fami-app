@@ -1,159 +1,133 @@
 <div>
   <div>
-    <h1>
-      Grant Coupons to Your Kids
-    </h1>
-    <p>
-      Rewards help motivate and inspire. They can encourage your kids to develop positive behaviors. 
-    </p>
-  </div>
-</div>
-
-<hr>
-
-<div>
-  <div>
-    <form action="/update_coupon" method="post">
-      <div>
-        <input type="hidden" id="chore_id_box" name="query_chore_id">
-      </div>
-
-      <div>
-        <input type="checkbox" id="redeemed_box" name="query_redeemed" value="1">
-
-        <label for="redeemed_box">Redeemed</label>
-      </div>
-
-      <div>
-        <label for="receiver_id_box">
-          Receiver
-        </label>
-
-        <input type="text" id="receiver_id_box" name="query_receiver_id">
-      </div>
-
-      <div>
-        <label for="giver_id_box">
-          Giver
-        </label>
-
-        <input type="text" id="giver_id_box" name="query_giver_id">
-      </div>
-
-      <div>
-        <label for="coupon_content_box">
-          Coupon content
-        </label>
-
-        <input type="text" id="coupon_content_box" name="query_coupon_content">
-      </div>
-
-      <div>
-        <label for="expiration_date_box">
-          Expiration date
-        </label>
-
-        <input type="date" id="expiration_date_box" name="query_expiration_date">
-      </div>
-
-      <button>
-        Create coupon
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
-<div>
-  <div>
-    <table>
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Chore
-        </th>
-
-        <th>
-          Redeemed
-        </th>
-
-        <th>
-          Receiver
-        </th>
-
-        <th>
-          Giver
-        </th>
-
-        <th>
-          Coupon content
-        </th>
-
-        <th>
-          Expiration date
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_coupons.each do |a_coupon| %>
-      <tr>
-        <td>
-          <%= a_coupon.id %>
-        </td>
-
-        <td>
-          <%= a_coupon.chore_id %>
-        </td>
-
-        <td>
-          <%= a_coupon.redeemed %>
-        </td>
-
-        <td>
-          <%= a_coupon.receiver_id %>
-        </td>
-
-        <td>
-          <%= a_coupon.giver_id %>
-        </td>
-
-        <td>
-          <%= a_coupon.coupon_content %>
-        </td>
-
-        <td>
-          <%= a_coupon.expiration_date %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_coupon.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_coupon.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/coupons/<%= a_coupon.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
+    <% matching_role_id = Member.where({ :user_id => @current_user.id }).at(0).role_id %>
+    <% matching_role = Role.where({ :id => matching_role_id }).at(0).role %>
+    <% if matching_role != "Son" %>
+      <% if matching_role != "Daughter" %>
+        <h1>
+          All Coupons You've Granted
+        </h1>
+      <% else %>
+        <h1>
+          Your Coupons
+        </h1>
       <% end %>
-    </table>
+    <% else %>
+      <h1>
+        Your Coupons
+      </h1>
+    <% end %>
   </div>
 </div>
-
+<hr>
+<div>
+  <div>
+    <% matching_role_id = Member.where({ :user_id => @current_user.id }).at(0).role_id %>
+    <% matching_role = Role.where({ :id => matching_role_id }).at(0).role %>
+    <% if (matching_role == "Son") || (matching_role == "Daughter") %>
+      <table>
+        <tr>
+          <th>
+          </th>
+          <th>
+            Giver
+          </th>
+          <th>
+            Coupon content
+          </th>
+          <th>
+            Expiration date
+          </th>
+          <th>
+            Redeemed
+          </th>
+          <th>
+          </th>
+        </tr>
+        <% @list_of_coupons.each do |a_coupon| %>
+          <tr>
+            <% if a_coupon.receiver_id == @current_user.id %>
+              <td>
+                <img src="https://help.idevaffiliate.com/wp-content/uploads/2015/04/coupon-graphic.gif" style="width:150px;">
+              </td>
+              <td>
+                <% matching_role = Member.where({ :user_id => a_coupon.giver_id }).at(0).role_id %>
+                <%= Role.where({ :id => matching_role }).at(0).role %>
+              </td>
+              <td>
+                <%= a_coupon.coupon_content %>
+              </td>
+              <td>
+                <%= a_coupon.expiration_date %>
+              </td>
+              <td>
+                <% if a_coupon.redeemed == false%>
+                  Haven't redeemed
+                <% else %>
+                  Redeemed
+                <% end %>
+              </td>
+              <td>
+                <a href="/redeem_coupon/<%= a_coupon.id %>"> Redeem Coupon </a>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <table>
+        <tr>
+          <th>
+          </th>
+          <th>
+            Receiver
+          </th>
+          <th>
+            Coupon content
+          </th>
+          <th>
+            Expiration date
+          </th>
+          <th>
+            Redeemed
+          </th>
+          <th>
+          </th>
+        </tr>
+        <% @list_of_coupons.each do |a_coupon| %>
+          <tr>
+            <% if a_coupon.giver_id == @current_user.id %>
+              <td>
+                <img src="https://help.idevaffiliate.com/wp-content/uploads/2015/04/coupon-graphic.gif" style="width:150px;">
+              </td>
+              <td>
+                <% matching_role = Member.where({ :user_id => a_coupon.receiver_id }).at(0).role_id %>
+                <%= User.where({ :id => a_coupon.receiver_id }).at(0).first_name %>
+                (<%= Role.where({ :id => matching_role }).at(0).role %>)
+              </td>
+              <td>
+                <%= a_coupon.coupon_content %>
+              </td>
+              <td>
+                <%= a_coupon.expiration_date %>
+              </td>
+              <td>
+                <% if a_coupon.redeemed == false%>
+                  Haven't redeemed
+                <% else %>
+                  Redeemed
+                <% end %>
+              </td>
+              <td>
+                <a href="/delete_coupon/<%= a_coupon.id %>">
+                  Delete Coupon
+                </a>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>
 <hr>

@@ -1,123 +1,37 @@
 <div>
   <div>
     <h1>
-      Coupon #<%= @the_coupon.id %> details
+      Grant Coupons to Your Kids
     </h1>
-
-    <div>
-      <div>
-        <a href="/coupons">
-          Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_coupon/<%= @the_coupon.id %>">
-          Delete coupon
-        </a>
-      </div>
-    </div>
-
-    <dl>
-      <dt>
-        Chore
-      </dt>
-      <dd>
-        <%= @the_coupon.chore_id %>
-      </dd>
-
-      <dt>
-        Redeemed
-      </dt>
-      <dd>
-        <%= @the_coupon.redeemed %>
-      </dd>
-
-      <dt>
-        Receiver
-      </dt>
-      <dd>
-        <%= @the_coupon.receiver_id %>
-      </dd>
-
-      <dt>
-        Giver
-      </dt>
-      <dd>
-        <%= @the_coupon.giver_id %>
-      </dd>
-
-      <dt>
-        Coupon content
-      </dt>
-      <dd>
-        <%= @the_coupon.coupon_content %>
-      </dd>
-
-      <dt>
-        Expiration date
-      </dt>
-      <dd>
-        <%= @the_coupon.expiration_date %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_coupon.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_coupon.updated_at) %> ago
-      </dd>
-    </dl>
+    <p>
+      Rewards help motivate and inspire. They can encourage your kids to develop positive behaviors. 
+    </p>
   </div>
 </div>
 
 <hr>
 
-
 <div>
   <div>
-    <h2>
-      Edit coupon
-    </h2>
-
     <form action="/modify_coupon/<%= @the_coupon.id %>"  method="post" >
       <div>
-        <label for="chore_id_box">
-          Chore
-        </label>
-
-        <input type="text" id="chore_id_box" name="query_chore_id" value="<%= @the_coupon.chore_id %>">
+        <input type="hidden" id="chore_id_box" name="query_chore_id" value="<%= @the_coupon.chore_id %>">
       </div>
 
       <div>
-        <input type="checkbox" id="redeemed_box" name="query_redeemed" value="1" <%= "checked" if @the_coupon.redeemed %>>
-
-        <label for="redeemed_box">
-            Redeemed
-        </label>
+        <%# type="checkbox" %>
+        <%# <label for="redeemed_box"> %>
+            <%# Redeemed %>
+        <%# </label> %>
+        <input type="hidden" id="redeemed_box" name="query_redeemed" value="1" <%= "checked" if @the_coupon.redeemed %>>
       </div>
 
       <div>
-        <label for="receiver_id_box">
-          Receiver
-        </label>
-
-        <input type="text" id="receiver_id_box" name="query_receiver_id" value="<%= @the_coupon.receiver_id %>">
+        <input type="hidden" id="receiver_id_box" name="query_receiver_id" value="<%= @the_coupon.receiver_id %>">
       </div>
 
       <div>
-        <label for="giver_id_box">
-          Giver
-        </label>
-
-        <input type="text" id="giver_id_box" name="query_giver_id" value="<%= @the_coupon.giver_id %>">
+        <input type="hidden" id="giver_id_box" name="query_giver_id" value="<%= @the_coupon.giver_id %>">
       </div>
 
       <div>
@@ -125,7 +39,7 @@
           Coupon content
         </label>
 
-        <input type="text" id="coupon_content_box" name="query_coupon_content" value="<%= @the_coupon.coupon_content %>">
+        <input type="text" id="coupon_content_box" name="query_coupon_content" value="<%= @the_coupon.coupon_content %>" placeholder="What rewards would you like to give to your kids?">
       </div>
 
       <div>
@@ -137,10 +51,25 @@
       </div>
 
       <button>
-        Update coupon
+        Grant the Coupon
       </button>
     </form>
   </div>
 </div>
 
 <hr>
+
+<div>
+  <h4 style="font-style: italic; text-align: center;"> A list of Kids Chore Rewards for your reference </h4>
+  <img src="https://cdn.loveandmarriageblog.com/wp-content/uploads/2017/04/kidchorerewards.png">
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <a href="/coupons">
+      Click to See the List of All Coupons You've Granted
+    </a>
+  </div>
+</div>
