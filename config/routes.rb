@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   
   # UPDATE
   
-  post("/modify_coupon/:path_id", { :controller => "coupons", :action => "update" })
+  get("/modify_coupon/:path_id", { :controller => "coupons", :action => "update" })
   
   # DELETE
   get("/delete_coupon/:path_id", { :controller => "coupons", :action => "destroy" })
