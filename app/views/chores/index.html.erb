@@ -92,7 +92,6 @@
     <% end %>
   </div>
 </div>
-
 <div>
   <div>
     <table>
@@ -119,9 +118,6 @@
           Coupon
         </th>
         <th>
-          Completed By
-        </th>
-        <th>
         </th>
       </tr>
       <% @list_of_chores.each do |a_chore| %>
@@ -144,12 +140,8 @@
           <td>
             <% if a_chore.completed %>
               Completed
-              <%#= check_box_tag "", "yes", true %>
-              <%#= label_tag "" %>
             <% else %>
               Not Completed
-              <%#= check_box_tag "", "yes", false %>
-              <%#= label_tag "" %>
             <% end %>
           </td>
           <td>
@@ -167,11 +159,16 @@
             <% end %>
           </td>
           <td>
-            <a href="/complete_chore/<%= a_chore.id %>"> Change Completion Status <a>
-              </td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-    </div>
-    <hr>
+            <a href="/complete_chore/<%= a_chore.id %>"> Change Completion Status </a>
+          </td>
+          <td>
+            <% if a_chore.completed %> 
+              <a href="/grant_coupon/<%= a_chore.id %>"> Would you like to grant coupon for this chore? </a>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+<hr>

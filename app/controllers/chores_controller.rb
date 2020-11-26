@@ -29,7 +29,17 @@ class ChoresController < ApplicationController
     the_id = params.fetch("path_id")
     matching_chore = Chore.where({ :id => the_id }).at(0)
     matching_chore.completed = true
+
+    the_coupon = Coupon.new
+    the_coupon.giver_id = @current_user.id
+    the_coupon.receiver_id = Chore.where({ :id => the_id }).at(0).receiver_id
+    the_coupon.redeemed = false
+    the_coupon.chore_id = the_id
+    the_coupon.save
+
+    matching_chore.coupon_id = the_coupon.id
     matching_chore.save
+
     redirect_to("/chores", :notice => "Successfully changed the completion status of the chore.")
   end
 
@@ -48,7 +58,7 @@ class ChoresController < ApplicationController
     the_chore.completed = params.fetch("query_completed", false)
     # the_chore.coupon_id = params.fetch("query_coupon_id")
     # the_chore.coupon_id = Coupon.where({ :receiver_id => @current_user.id }).at(0).id
-    the_chore.coupon_id = the_chore.id
+    the_chore.coupon_id = NULL
 
     if the_chore.valid?
       the_chore.save

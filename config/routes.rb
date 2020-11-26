@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   
   post("/modify_chore/:path_id", { :controller => "chores", :action => "update" })
   
-  get("/complete_chore/:path_id", { :controller => "chores", :action => "complete"})
+  get("/complete_chore/:path_id", { :controller => "chores", :action => "complete" })
   
   # DELETE
   get("/delete_chore/:path_id", { :controller => "chores", :action => "destroy" })
