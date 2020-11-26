@@ -143,13 +143,15 @@
                 <% end %>
               </td>
               <td>
-                <a href="/complete_chore/<%= a_chore.id %>"> Change Completion Status </a>
-              </td>
-              <td>
-                <% if a_chore.completed %> 
-                  <a href="/coupons/<%= a_chore.coupon_id %>"> Grant Coupons To Your Kids!! </a>
+                <% if a_chore.completed == false %>
+                  <a href="/complete_chore/<%= a_chore.id %>"> Change Completion Status</a>
                 <% end %>
               </td>
+              <td>
+                <% if a_chore.completed %>
+                  <a href="/coupons/<%= a_chore.coupon_id %>"> Grant Coupons To Your Kids!! </a>
+                <% end %>
+              <td>
             </tr>
           <% end %>
         </table>

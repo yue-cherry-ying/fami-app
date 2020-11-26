@@ -14,6 +14,17 @@
 <div>
   <div>
     <form action="/modify_coupon/<%= @the_coupon.id %>"  method="post" >
+      
+        <% if @the_coupon.coupon_content.blank? == false %>
+          <div class="alert alert-danger" role="alert">
+            YOU'VE ALREADY GRANTED COUPON FOR THIS CHORE! 
+            <div>
+              <a href="/chores">
+                Go Back
+              </a>
+            </div>
+          </div>
+        <% end %>
       <div>
         <input type="hidden" id="chore_id_box" name="query_chore_id" value="<%= @the_coupon.chore_id %>">
       </div>
@@ -70,6 +81,11 @@
   <div>
     <a href="/coupons">
       Click to See the List of All Coupons You've Granted
+    </a>
+  </div>
+  <div>
+    <a href="/chores">
+      Go Back
     </a>
   </div>
 </div>
