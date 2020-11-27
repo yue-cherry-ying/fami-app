@@ -3,23 +3,14 @@
     <h1>
       Profile for <%= @the_member.user.first_name %> <%= @the_member.user.last_name %>
     </h1>
-
     <div>
       <div>
         <a href="/members" class="btn btn-block btn-outline-secondary">
           Go back
         </a>
-
         <%# &nbsp;|&nbsp; %>
-        
-        <a href="/delete_member/<%= @the_member.id %>" class="btn btn-block btn-outline-secondary">
-          Delete member
-        </a>
       </div>
-
-      
     </div>
-
     <dl>
       <dt>
         Name
@@ -27,105 +18,133 @@
       <dd>
         <%= @the_member.user.first_name %> <%= @the_member.user.last_name %>
       </dd>
-
       <dt>
         Profile image
       </dt>
       <dd>
         <img src=<%= @the_member.user.profile_image %> style="width:250px;">
       </dd>
-
       <dt>
         Bio
       </dt>
       <dd>
         <%= @the_member.user.bio %>
       </dd>
-
     </dl>
   </div>
 </div>
-
 <hr>
-
 <h2>Coupons</h2>
-
 <table border="1">
-  <tr>
-    <th>
-      Coupon Content
-    </th>
-
-    <th>
-      Giver Name
-    </th>
-
-    <th>
-      Expiration Date
-    </th>
-  </tr>
-
-  <% @the_member.coupons.each do |a_coupon| %>
+  <% if (@the_member.role.role == "Daughter") || (@the_member.role.role == "Son") %>
     <tr>
-      <td>
-        <%= a_coupon.coupon_content %>
-      </td>
-
-      <td>
-        <%= a_coupon.member.name %>
-      </td>
-
-      <td>
-        <%= a_coupon.expiration_date %>
-      </td>
-
-      <td>
-        <a href="/services/<%= a_coupon.service.id %>">
-          Show details of the linked service
-        </a>
-      </td>
+      <th>
+        Coupon Content
+      </th>
+      <th>
+        Giver Name
+      </th>
+      <th>
+        Expiration Date
+      </th>
     </tr>
+    <% @list_of_members.each do |a_member| %>
+      <% if a_member.user_id == @the_member.user_id %>
+        <% @the_member.user.coupons.each do |a_coupon| %>
+          <tr>
+            <td>
+              <%= a_coupon.coupon_content %>
+            </td>
+            <td>
+              <% matching_role_id = Member.where({ :user_id => a_coupon.giver_id }).at(0).role_id %>
+              <%= Role.where({ :id => matching_role_id }).at(0).role %>
+            </td>
+            <td>
+              <%= a_coupon.expiration_date %>
+            </td>
+            <td>
+              <a href="/chores/<%= a_coupon.chore.id %>">
+                Show details of the linked chore
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <tr>
+      <th>
+        Coupon Content
+      </th>
+      <th>
+        Receiver Kid Name
+      </th>
+      <th>
+        Expiration Date
+      </th>
+    </tr>
+    <% @list_of_members.each do |a_member| %>
+      <% if a_member.user_id == @the_member.user_id %>
+        <% a_member.coupons.each do |a_coupon| %>
+          <tr>
+            <td>
+              <%= a_coupon.coupon_content %>
+            </td>
+            <td>
+              <%= User.where({ :id => a_coupon.receiver_id }).at(0).first_name %>
+            </td>
+            <td>
+              <%= a_coupon.expiration_date %>
+            </td>
+            <td>
+              <a href="/chores/<%= a_coupon.chore.id %>">
+                Show details of the linked chore
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 </table>
-
+<hr>
 <div>
   <div>
     <% if @current_user.id == @the_member.user_id %>
       <h2>
-        Edit member
+        Edit Your Profile
       </h2>
-
       <form action="/modify_member/<%= @the_member.id %>"  method="post" >
         <div>
           <label for="name_box">
             Name
           </label>
-
           <input type="text" id="name_box" name="query_name" value="<%= @the_member.user.first_name %>">
         </div>
-
         <div>
           <label for="profile_image_box">
             Profile image
           </label>
-
           <input type="text" id="profile_image_box" name="query_profile_image" value="<%= @the_member.user.profile_image %>">
         </div>
-
         <div>
           <label for="bio_box">
             Bio
           </label>
-
           <textarea id="bio_box" name="query_bio"><%= @the_member.user.bio %></textarea>
         </div>
-
         <button>
-          Update member
+          Update Your Profile
         </button>
       </form>
+    <% else %>
+      <div>
+        <a href="/delete_member/<%= @the_member.id %>" class="btn btn-block btn-outline-secondary">
+          Delete Member
+        </a>
+      </div>
     <% end %>
   </div>
 </div>
-
 <hr>
+

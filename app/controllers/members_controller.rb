@@ -9,6 +9,11 @@ class MembersController < ApplicationController
   end
 
   def show
+    matching_family = Family.where({ :family_name => @current_user.last_name }).at(0)
+    matching_members = Member.where({ :family_id => matching_family.id })
+
+    @list_of_members = matching_members.order({ :created_at => :desc })
+
     the_id = params.fetch("path_id")
 
     matching_members = Member.where({ :id => the_id })
