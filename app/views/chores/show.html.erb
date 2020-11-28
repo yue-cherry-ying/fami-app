@@ -1,161 +1,90 @@
 <div>
   <div>
+    <img src=<%= @the_chore.chore_image %> class="rounded mx-auto d-block img-thumbnail" alt=<%= @the_chore.chore_name %>  style="width: 100%/9;">
     <h1>
-      Chore #<%= @the_chore.id %> details
+      <%= @the_chore.chore_name %>
     </h1>
-
-    <div>
-      <div>
-        <a href="/chores">
-          Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_chore/<%= @the_chore.id %>">
-          Delete chore
-        </a>
-      </div>
-    </div>
-
     <dl>
       <dt>
-        Family
+        Complete By (kid)
       </dt>
       <dd>
-        <%= @the_chore.family_id %>
+        <%= User.where({ :id => @the_chore.receiver_id }).at(0).first_name %>
       </dd>
-
-      <dt>
-        Role
-      </dt>
-      <dd>
-        <%= @the_chore.role_id %>
-      </dd>
-
-      <dt>
-        Chore name
-      </dt>
-      <dd>
-        <%= @the_chore.chore_name %>
-      </dd>
-
       <dt>
         Category
       </dt>
       <dd>
         <%= @the_chore.category %>
       </dd>
-
       <dt>
         Due date
       </dt>
       <dd>
         <%= @the_chore.due_date %>
       </dd>
-
       <dt>
-        Completed
+        Completion Status
       </dt>
       <dd>
-        <%= @the_chore.completed %>
+        <% if @the_chore.completed %>
+          Completed
+        <% else %>
+          Not Completed
+        <% end %>
       </dd>
-
-      <dt>
-        Coupon
-      </dt>
-      <dd>
-        <%= @the_chore.coupon_id %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_chore.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_chore.updated_at) %> ago
-      </dd>
+      <% if @the_chore.completed %>
+        <dt>
+          Coupon Awarded
+        </dt>
+        <dd>
+          #link to coupon details page
+        </dd>
+      <% end %>
     </dl>
   </div>
 </div>
-
 <hr>
-
-
+<%# matching_role_id = Member.where({ :user_id => @current_user.id }).at(0).role_id %>
+<%# matching_role = Role.where({ :id => matching_role_id }).at(0).role %>
+<%# if (matching_role != "Son") ||  matching_role != "Daughter" %>
 <div>
   <div>
-    <h2>
-      Edit chore
-    </h2>
-
-    <form action="/modify_chore/<%= @the_chore.id %>"  method="post" >
-      <div>
-        <label for="family_id_box">
-          Family
-        </label>
-
-        <input type="text" id="family_id_box" name="query_family_id" value="<%= @the_chore.family_id %>">
-      </div>
-
-      <div>
-        <label for="role_id_box">
-          Role
-        </label>
-
-        <input type="text" id="role_id_box" name="query_role_id" value="<%= @the_chore.role_id %>">
-      </div>
-
-      <div>
-        <label for="chore_name_box">
-          Chore name
-        </label>
-
-        <input type="text" id="chore_name_box" name="query_chore_name" value="<%= @the_chore.chore_name %>">
-      </div>
-
-      <div>
-        <label for="category_box">
-          Category
-        </label>
-
-        <input type="text" id="category_box" name="query_category" value="<%= @the_chore.category %>">
-      </div>
-
-      <div>
-        <label for="due_date_box">
-          Due date
-        </label>
-
-        <input type="date" id="due_date_box" name="query_due_date" value="<%= @the_chore.due_date %>">
-      </div>
-
-      <div>
-        <input type="checkbox" id="completed_box" name="query_completed" value="1" <%= "checked" if @the_chore.completed %>>
-
-        <label for="completed_box">
-            Completed
-        </label>
-      </div>
-
-      <div>
-        <label for="coupon_id_box">
-          Coupon
-        </label>
-
-        <input type="text" id="coupon_id_box" name="query_coupon_id" value="<%= @the_chore.coupon_id %>">
-      </div>
-
-      <button>
-        Update chore
-      </button>
-    </form>
+    <% if @the_chore.giver_id == @current_user.id %>
+      <h2>
+        Edit Chore
+      </h2>
+      <form action="/modify_chore/<%= @the_chore.id %>"  method="post" >
+        <div>
+          <label for="chore_name_box">
+            <%= @the_chore.chore_name %>
+          </label>
+        </div>
+        <div>
+          <label for="due_date_box">
+            Extend the Deadline of the Chore
+          </label>
+          <input type="date" id="due_date_box" name="query_due_date" value="<%= @the_chore.due_date %>">
+        </div>
+        <div>
+          <input type="checkbox" id="completed_box" name="query_completed" value="1" <%= "checked" if @the_chore.completed %>>
+          <label for="completed_box">
+            Change the Completion Status
+          </label>
+        </div>
+        <button>
+          Update Chore
+        </button>
+      </form>
+      <hr>
+    <% end %>
   </div>
 </div>
 
-<hr>
+<div>
+  <div>
+    <a href="/">
+      Go Back
+    </a>
+  </div>
+</div>

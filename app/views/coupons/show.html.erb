@@ -17,12 +17,13 @@
       
         <% if @the_coupon.coupon_content.blank? == false %>
           <div class="alert alert-danger" role="alert">
-            YOU'VE ALREADY GRANTED COUPON FOR THIS CHORE! 
-            <div>
-              <a href="/chores">
+            <h4 class="text-center">
+              YOU'VE ALREADY GRANTED COUPON FOR THIS CHORE! 
+              &nbsp &nbsp
+              <a href="/chores" class="btn btn-danger">
                 Go Back
               </a>
-            </div>
+            </h4>
           </div>
         <% end %>
       <div>

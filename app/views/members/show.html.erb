@@ -3,14 +3,6 @@
     <h1>
       Profile for <%= @the_member.user.first_name %> <%= @the_member.user.last_name %>
     </h1>
-    <div>
-      <div>
-        <a href="/members" class="btn btn-block btn-outline-secondary">
-          Go back
-        </a>
-        <%# &nbsp;|&nbsp; %>
-      </div>
-    </div>
     <dl>
       <dt>
         Name
@@ -64,7 +56,7 @@
             </td>
             <td>
               <a href="/chores/<%= a_coupon.chore.id %>">
-                Show details of the linked chore
+                Details of the Linked Chore
               </a>
             </td>
           </tr>
@@ -98,7 +90,7 @@
             </td>
             <td>
               <a href="/chores/<%= a_coupon.chore.id %>">
-                Show details of the linked chore
+                Details of the Linked Chore
               </a>
             </td>
           </tr>
@@ -137,14 +129,17 @@
           Update Your Profile
         </button>
       </form>
-    <% else %>
-      <div>
-        <a href="/delete_member/<%= @the_member.id %>" class="btn btn-block btn-outline-secondary">
-          Delete Member
-        </a>
-      </div>
+      <%# One shouldn't be allowed to delete family members %>
     <% end %>
+     <div>
+      <div>
+        <a href="/members" class="btn btn-secondary btn-lg btn-block">
+          Go back
+        </a>
+        <%# &nbsp;|&nbsp; %>
+      </div>
+    </div>
   </div>
 </div>
-<hr>
+
 

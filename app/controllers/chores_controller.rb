@@ -16,6 +16,10 @@ class ChoresController < ApplicationController
   end
 
   def show
+    matching_chores = Chore.all
+
+    @list_of_chores = matching_chores.order({ :created_at => :desc })
+
     the_id = params.fetch("path_id")
 
     matching_chores = Chore.where({ :id => the_id })
@@ -69,6 +73,10 @@ class ChoresController < ApplicationController
   end
 
   def update
+    matching_chores = Chore.all
+
+    @list_of_chores = matching_chores.order({ :created_at => :desc })
+    
     the_id = params.fetch("path_id")
     the_chore = Chore.where({ :id => the_id }).at(0)
 
