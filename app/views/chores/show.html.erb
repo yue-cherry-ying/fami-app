@@ -1,7 +1,8 @@
-<div>
-  <div>
-    <img src=<%= @the_chore.chore_image %> class="rounded mx-auto d-block img-thumbnail" alt=<%= @the_chore.chore_name %>  style="width: 100%/9;">
-    <h1>
+<div class="card-deck">
+  <div class="card text-center text-white bg-dark" style="width: 18rem;">
+    <img src=<%= @the_chore.chore_image %> class="card-img-top" alt=<%= @the_chore.chore_name %> style="opacity: 0.3;">
+    <div class="card-body">
+    <h1 class="card-title">
       <%= @the_chore.chore_name %>
     </h1>
     <dl>
@@ -34,14 +35,19 @@
         <% end %>
       </dd>
       <% if @the_chore.completed %>
-        <dt>
-          Coupon Awarded
-        </dt>
-        <dd>
-          #link to coupon details page
-        </dd>
+        <a href="/coupons">Coupon Awarded</a>
       <% end %>
     </dl>
+    </div>
+  </div>
+  <div class="card">
+    <% matching_user = User.where({ :id => @the_chore.receiver_id }).at(0) %>
+    <img class="card-img-top" src=<%= matching_user.profile_image %> alt=<%= matching_user.first_name %>>
+    <div class="card-body">
+      <h5 class="card-title"><%= matching_user.first_name %> <%= matching_user.last_name %></h5>
+      <p class="card-text"><%= matching_user.bio %></p>
+      <p class="card-text"><small class="text-muted"><%= matching_user.email %></small></p>
+    </div>
   </div>
 </div>
 <hr>
@@ -83,8 +89,9 @@
 
 <div>
   <div>
-    <a href="/">
+    <a href="/chores" class="btn btn-secondary btn-lg">
       Go Back
     </a>
+    <p>Back to the Chore List to Make Edits on the Completion Status and Grant Coupon to Your Kids.</p>
   </div>
 </div>

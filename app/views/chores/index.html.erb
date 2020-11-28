@@ -117,6 +117,8 @@
             </th>
             <th>
             </th>
+            <th>
+            </th>
           </tr>
           <% @list_of_chores.each do |a_chore| %>
             <tr>
@@ -142,9 +144,13 @@
                   Not Completed
                 <% end %>
               </td>
-              
               <td>
-                
+                <a href="/chores/<%= a_chore.id %>">
+                  Chore Details
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+              </td>
+              <td>
                 <% if a_chore.completed == false %>
                   <a href="/complete_chore/<%= a_chore.id %>" class="btn btn-success" style="color:white"> Change Completion Status</a>
                 <% end %>
