@@ -2,42 +2,42 @@
   <div class="card text-center text-white bg-dark" style="width: 18rem;">
     <img src=<%= @the_chore.chore_image %> class="card-img-top" alt=<%= @the_chore.chore_name %> style="opacity: 0.3;">
     <div class="card-body">
-    <h1 class="card-title">
-      <%= @the_chore.chore_name %>
-    </h1>
-    <dl>
-      <dt>
-        Complete By (kid)
-      </dt>
-      <dd>
-        <%= User.where({ :id => @the_chore.receiver_id }).at(0).first_name %>
-      </dd>
-      <dt>
-        Category
-      </dt>
-      <dd>
-        <%= @the_chore.category %>
-      </dd>
-      <dt>
-        Due date
-      </dt>
-      <dd>
-        <%= @the_chore.due_date %>
-      </dd>
-      <dt>
-        Completion Status
-      </dt>
-      <dd>
+      <h1 class="card-title">
+        <%= @the_chore.chore_name %>
+      </h1>
+      <dl>
+        <dt>
+          Complete By (kid)
+        </dt>
+        <dd>
+          <%= User.where({ :id => @the_chore.receiver_id }).at(0).first_name %>
+        </dd>
+        <dt>
+          Category
+        </dt>
+        <dd>
+          <%= @the_chore.category %>
+        </dd>
+        <dt>
+          Due date
+        </dt>
+        <dd>
+          <%= @the_chore.due_date %>
+        </dd>
+        <dt>
+          Completion Status
+        </dt>
+        <dd>
+          <% if @the_chore.completed %>
+            Completed
+          <% else %>
+            Not Completed
+          <% end %>
+        </dd>
         <% if @the_chore.completed %>
-          Completed
-        <% else %>
-          Not Completed
+          <a href="/coupons">Coupon Awarded</a>
         <% end %>
-      </dd>
-      <% if @the_chore.completed %>
-        <a href="/coupons">Coupon Awarded</a>
-      <% end %>
-    </dl>
+      </dl>
     </div>
   </div>
   <div class="card">
@@ -57,41 +57,49 @@
 <div>
   <div>
     <% if @the_chore.giver_id == @current_user.id %>
-      <h2>
+      <%# <h2>
         Edit Chore
-      </h2>
-      <form action="/modify_chore/<%= @the_chore.id %>"  method="post" >
-        <div>
-          <label for="chore_name_box">
-            <%= @the_chore.chore_name %>
-          </label>
+      </h2> %>
+      <form action="/modify_chore/<%= @the_chore.id %>"  method="post">
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <label for="due_date_box" class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Extend the Deadline of the Chore</span>
+              </label>
+              <input type="date" class="form-control" id="due_date_box" name="query_due_date" value="<%= @the_chore.due_date %>" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" id="completed_box" name="query_completed"  aria-label="Checkbox for following completion status" value="1" <%= "checked" if @the_chore.completed %>>
+                </div>
+              </div>
+              <input type="text" class="form-control" aria-label="Change the Completion Status" placeholder="Change the Completion Status">
+            </div>
+          </div>
+          <%# <label for="completed_box" class="form-control"> %>
+          <%# </label> %>
         </div>
-        <div>
-          <label for="due_date_box">
-            Extend the Deadline of the Chore
-          </label>
-          <input type="date" id="due_date_box" name="query_due_date" value="<%= @the_chore.due_date %>">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary" type="button">
+              Update Chore
+            </button>
+          </div>
         </div>
-        <div>
-          <input type="checkbox" id="completed_box" name="query_completed" value="1" <%= "checked" if @the_chore.completed %>>
-          <label for="completed_box">
-            Change the Completion Status
-          </label>
-        </div>
-        <button>
-          Update Chore
-        </button>
       </form>
       <hr>
     <% end %>
   </div>
 </div>
-
 <div>
   <div>
     <a href="/chores" class="btn btn-secondary btn-lg">
       Go Back
     </a>
-    <p>Back to the Chore List to Make Edits on the Completion Status and Grant Coupon to Your Kids.</p>
+    <small class="form-text text-muted">Back to the Chore List to Make Edits on the Completion Status and Grant Coupon to Your Kids.</small>
   </div>
 </div>
