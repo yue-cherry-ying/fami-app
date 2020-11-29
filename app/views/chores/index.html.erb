@@ -20,14 +20,15 @@
           + Add a Chore
         </h3>
         <form action="/insert_chore" method="post">
-          <div>
+          <div class="form-row">
+          <div class="form-group">
             <input type="hidden" id="family_id_box" name="query_family_id">
           </div>
-          <div>
+          <div class="form-group col-md-6">
             <label for="receiver_id_box">
               Which kid is going to complete the chore?
             </label>
-            <select id="receiver_id_box" name="query_receiver_id" placeholder="Which kid is going to complete the chore?">
+            <select class="form-control" id="receiver_id_box" name="query_receiver_id" placeholder="Which kid is going to complete the chore?">
               <% @list_of_users.each do |user| %>
                 <% if user.last_name == @current_user.last_name %>
                   <% matching_role_id = Member.where({ :user_id => user.id }).at(0).role_id %>
@@ -41,46 +42,49 @@
               <% end %>
             </select>
           </div>
-          <div>
+          <div class="form-group">
             <input type="hidden" id="giver_id_box" name="query_giver_id">
           </div>
-          <div>
+          <div class="form-group col-md-6">
             <label for="chore_name_box">
-              Chore name
+              Chore Name
             </label>
-            <input type="text" id="chore_name_box" name="query_chore_name" placeholder="Enter a chore name">
+            <input class="form-control" type="text" id="chore_name_box" name="query_chore_name" placeholder="Enter a chore name">
           </div>
-          <div>
+          </div>
+          <div class="form-group">
             <label for="image_box">
               Image
             </label>
-            <input type="text" id="image_box" name="query_image" placeholder="Enter a URL for the image...">
+            <input class="form-control" type="text" id="image_box" name="query_image" placeholder="Enter a URL for the image...">
           </div>
-          <div>
+          <div class="form-row">
+          <div class="form-group col-md-6">
             <label for="category_box">
               Category
             </label>
-            <select id="category_box" name="query_category" placeholder="Choose a category from the list">
+            <select class="form-control" id="category_box" name="query_category" placeholder="Choose a category from the list">
               <option value="Washing">Washing</option>
               <option value="Cooking">Cooking</option>
               <option value="Cleaning">Cleaning</option>
               <option value="Other">Other</option>
             </select>
           </div>
-          <div>
+          <div class="form-group col-md-6">
             <label for="due_date_box">
-              Due date
+              Due Date
             </label>
-            <input type="date" id="due_date_box" name="query_due_date" placeholder="Enter the due date of the chore...">
+            <input class="form-control" type="date" id="due_date_box" name="query_due_date" placeholder="Enter the due date of the chore...">
           </div>
-          <div>
-            <input type="checkbox" id="completed_box" name="query_completed" value="1">
-            <label for="completed_box">Completed</label>
           </div>
-          <div>
+          <div class="form-group form-check">
+            <input class="form-check-input" type="checkbox" id="completed_box" name="query_completed" value="1">
+            <label class="form-check-label" for="completed_box">Completed</label>
+          </div>
+          <div class="form-group">
             <input type="hidden" id="coupon_id_box" name="query_coupon_id">
           </div>
-          <button>
+          <button type="submit" class="btn btn-primary mb-2">
             Create Chore
           </button>
         </form>
@@ -95,73 +99,47 @@
     <% matching_role = Role.where({ :id => matching_role_id }).at(0).role %>
     <% if matching_role != "Son" %>
       <% if matching_role != "Daughter" %>
-        <div class="card-deck">
-          <% @list_of_chores.each do |a_chore| %>
-            <div class="card">
-              <img class="card-img-top" src=<%= a_chore.chore_image %> style="width:250px;">
-              <div class="card-body">
-                <h5 class="card-title"><%= a_chore.chore_name %></h5>
-                <p class="card-text">Complete By <%= User.where({ :id => a_chore.receiver_id }).at(0).first_name %> (kid) </p>
-                <p class="card-text">
-                  <div style="font-weight: bold;">Category:</div>
-                  <%= a_chore.category %>
-                </p>
-                <p class="card-text">
-                  <div style="font-weight: bold;">Due Date:</div>
-                  <%= a_chore.due_date %>
-                </p>
-                <p class="card-text">
-                  <% if a_chore.completed %>
-                    Chore Completed
-                  <% else %>
-                    Chore Not Completed
-                  <% end %>
-                </p>
-              </div>
-            </div>
-          <% end %>
-        </div>
-        <table>
+        <table class="table table-hover">
+          <thead>
           <tr>
-            <th>
-            </th>
-            <th>
+            <th scope="col">
               Complete By (kid)
             </th>
-            <th>
-              Chore name
+            <th scope="col">
+              Chore Name
             </th>
-            <%# <th>
+            <th scope="col">
               Image
-            </th> %>
-            <th>
+            </th>
+            <th scope="col">
               Category
             </th>
-            <th>
-              Due date
+            <th scope="col">
+              Due Date
             </th>
-            <th>
+            <th scope="col">
               Status
             </th>
-            <th>
+            <th scope="col">
             </th>
-            <th>
+            <th scope="col">
+            </th>
+            <th scope="col">
             </th>
           </tr>
+          </thead>
           <% @list_of_chores.each do |a_chore| %>
+            <tbody>
             <tr>
-              <td>
-                <img src=<%= a_chore.chore_image %> style="width:250px;">
-              </td>
               <td>
                 <%= User.where({ :id => a_chore.receiver_id }).at(0).first_name %>
               </td>
               <td>
                 <%= a_chore.chore_name %>
               </td>
-              <%# <td>
-           
-              </td> %>
+              <td>
+                <img src=<%= a_chore.chore_image %> style="width:250px;">
+              </td>
               <td>
                 <%= a_chore.category %>
               </td>
@@ -179,7 +157,6 @@
                 <a href="/chores/<%= a_chore.id %>">
                   Chore Details
                 </a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
               </td>
               <td>
                 <% if a_chore.completed == false %>
@@ -192,29 +169,29 @@
                 <% end %>
               <td>
             </tr>
+            </tbody>
           <% end %>
         </table>
-        </div>
-        </div>
       <% else %>
-        <table>
+        <table class="table table-hover">
+          <thead>
           <tr>
-            <th>
-              Chore name
+            <th scope="col">
+              Chore Name
             </th>
-            <th>
+            <th scope="col">
               Image
             </th>
-            <th>
+            <th scope="col">
               Category
             </th>
-            <th>
-              Due date
+            <th scope="col">
+              Due Date
             </th>
-            <th>
+            <th scope="col">
               Status
             </th>
-            <th>
+            <th scope="col">
             </th>
           </tr>
           <% @list_of_chores.each do |a_chore| %>
@@ -247,27 +224,29 @@
               </tr>
             <% end %>
           <% end %>
+          </thead>
         </table>
       <% end %>
     <% else %>
-      <table>
+      <table class="table table-hover">
+          <thead>
           <tr>
-            <th>
-              Chore name
+            <th scope="col">
+              Chore Name
             </th>
-            <th>
+            <th scope="col">
               Image
             </th>
-            <th>
+            <th scope="col">
               Category
             </th>
-            <th>
-              Due date
+            <th scope="col">
+              Due Date
             </th>
-            <th>
+            <th scope="col">
               Status
             </th>
-            <th>
+            <th scope="col">
             </th>
           </tr>
           <% @list_of_chores.each do |a_chore| %>
@@ -300,6 +279,7 @@
               </tr>
             <% end %>
           <% end %>
+          </thead>
         </table>
     <% end %>
   </div>
