@@ -1,7 +1,13 @@
 <div>
-  <div>
+  <div style="
+  font-family: 'Architects Daughter', cursive;
+  background-image: url('https://nyc3.digitaloceanspaces.com/creativetacos.cdn/2019/02/Lazeez-Watercolor-Textures-4K-UHD-Backgrounds4.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 25px;">
     <h1>
-      Grant Coupons to Your Kids
+      GRANT COUPONS TO YOUR KIDS
     </h1>
     <p>
       Rewards help motivate and inspire. They can encourage your kids to develop positive behaviors. 
@@ -17,13 +23,13 @@
       
         <% if @the_coupon.coupon_content.blank? == false %>
           <div class="alert alert-danger" role="alert">
-            <h4 class="text-center">
+            <h5 class="text-center">
               YOU'VE ALREADY GRANTED COUPON FOR THIS CHORE! 
               &nbsp &nbsp
               <a href="/chores" class="btn btn-danger">
                 Go Back
               </a>
-            </h4>
+            </h5>
           </div>
         <% end %>
       <div>
@@ -46,20 +52,26 @@
         <input type="hidden" id="giver_id_box" name="query_giver_id" value="<%= @the_coupon.giver_id %>">
       </div>
 
-      <div>
-        <label for="coupon_content_box">
-          Coupon content
-        </label>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="coupon_content_box">
+              Coupon content
+            </label>
 
-        <input type="text" id="coupon_content_box" name="query_coupon_content" value="<%= @the_coupon.coupon_content %>" placeholder="What rewards would you like to give to your kids?">
-      </div>
+            <input class="form-control" type="text" id="coupon_content_box" name="query_coupon_content" value="<%= @the_coupon.coupon_content %>" placeholder="What rewards would you like to give to your kids?">
+          </div>
+        </div>
 
-      <div>
-        <label for="expiration_date_box">
-          Expiration date
-        </label>
+        <div class="col">
+          <div class="form-group">
+            <label for="expiration_date_box">
+              Expiration date
+            </label>
 
-        <input type="date" id="expiration_date_box" name="query_expiration_date" value="<%= @the_coupon.expiration_date %>">
+            <input class="form-control" type="date" id="expiration_date_box" name="query_expiration_date" value="<%= @the_coupon.expiration_date %>">
+          </div>
+        </div>
       </div>
 
       <button>
@@ -72,21 +84,43 @@
 <hr>
 
 <div>
-  <h4 style="font-style: italic; text-align: center;"> A list of Kids Chore Rewards for your reference </h4>
-  <img src="https://cdn.loveandmarriageblog.com/wp-content/uploads/2017/04/kidchorerewards.png">
+  <h4 style="text-align: center; font-family: 'Architects Daughter', cursive;"> A list of Kids Chore Rewards for your reference </h4>
+  <img src="https://cdn.loveandmarriageblog.com/wp-content/uploads/2017/04/kidchorerewards.png"
+  style="display: block;
+  margin-left: auto;
+  margin-right: auto;">
 </div>
 
 <hr>
 
 <div>
-  <div type="button" class="btn btn-info btn-lg btn-block">
-    <a href="/coupons" style="color: white">
+  <div class="row">
+    <div class="col-12 text-center">
+      <p class="mb-2">
+        <a href="/coupons" class="btn btn-outline-info btn-lg" role="button" aria-pressed="true" style="font-family: 'Architects Daughter', cursive;">
+          Click to See the List of All Coupons You've Granted
+        </a>
+      </p>
+    </div>
+  </div>
+  <%# <div type="button" class="btn btn-info btn-lg">
+    <a href="/coupons" style="color: white;">
       Click to See the List of All Coupons You've Granted
     </a>
+  </div> %>
+  <br>
+  <div class="row">
+    <div class="col-12 text-center">
+      <p class="mb-2">
+        <a href="/chores" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">
+          Go Back
+        </a>
+      </p>
+    </div>
   </div>
-  <div type="button" class="btn btn-secondary btn-lg btn-block">
+  <%# <div type="button" class="btn btn-secondary btn-lg">
     <a href="/chores" style="color: white">
       Go Back
     </a>
-  </div>
+  </div> %>
 </div>
