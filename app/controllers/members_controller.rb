@@ -25,9 +25,9 @@ class MembersController < ApplicationController
 
   def create
     the_member = Member.new
-    the_member.name = params.fetch("query_name")
-    the_member.profile_image = params.fetch("query_profile_image")
-    the_member.bio = params.fetch("query_bio")
+    the_member.user.name = params.fetch("query_name")
+    the_member.user.profile_image = params.fetch("query_profile_image")
+    the_member.user.bio = params.fetch("query_bio")
 
     if the_member.valid?
       the_member.save
@@ -41,9 +41,9 @@ class MembersController < ApplicationController
     the_id = params.fetch("path_id")
     the_member = Member.where({ :id => the_id }).at(0)
 
-    the_member.name = params.fetch("query_name")
-    the_member.profile_image = params.fetch("query_profile_image")
-    the_member.bio = params.fetch("query_bio")
+    the_member.user.first_name = params.fetch("query_first_name")
+    the_member.user.profile_image = params.fetch("query_profile_image")
+    the_member.user.bio = params.fetch("query_bio")
 
     if the_member.valid?
       the_member.save

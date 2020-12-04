@@ -2,30 +2,31 @@
   <div class="card text-center text-white bg-dark" style="width: 18rem;">
     <img src=<%= @the_chore.chore_image %> class="card-img-top" alt=<%= @the_chore.chore_name %> style="opacity: 0.3;">
     <div class="card-body">
-      <h1 class="card-title">
+      <h1 class="card-title" style="font-family: 'Architects Daughter', cursive;">
         <%= @the_chore.chore_name %>
       </h1>
+      <br>
       <dl>
-        <dt>
-          Complete By (kid)
+        <dt style="font-family: 'Architects Daughter', cursive;">
+          Complete By (kid):
         </dt>
         <dd>
           <%= User.where({ :id => @the_chore.receiver_id }).at(0).first_name %>
         </dd>
-        <dt>
-          Category
+        <dt style="font-family: 'Architects Daughter', cursive;">
+          Category:
         </dt>
         <dd>
           <%= @the_chore.category %>
         </dd>
-        <dt>
-          Due date
+        <dt style="font-family: 'Architects Daughter', cursive;">
+          Due date:
         </dt>
         <dd>
           <%= @the_chore.due_date %>
         </dd>
-        <dt>
-          Completion Status
+        <dt style="font-family: 'Architects Daughter', cursive;">
+          Completion Status:
         </dt>
         <dd>
           <% if @the_chore.completed %>
@@ -34,6 +35,7 @@
             Not Completed
           <% end %>
         </dd>
+        <br>
         <% if @the_chore.completed %>
           <a href="/coupons">Coupon Awarded</a>
         <% end %>
@@ -44,7 +46,7 @@
     <% matching_user = User.where({ :id => @the_chore.receiver_id }).at(0) %>
     <img class="card-img-top" src=<%= matching_user.profile_image %> alt=<%= matching_user.first_name %>>
     <div class="card-body">
-      <h5 class="card-title"><%= matching_user.first_name %> <%= matching_user.last_name %></h5>
+      <h3 class="card-title" style="font-family: 'Architects Daughter', cursive;"><%= matching_user.first_name %> <%= matching_user.last_name %></h3>
       <p class="card-text"><%= matching_user.bio %></p>
       <p class="card-text"><small class="text-muted"><%= matching_user.email %></small></p>
     </div>

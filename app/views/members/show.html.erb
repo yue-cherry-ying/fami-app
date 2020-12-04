@@ -1,140 +1,131 @@
-<div>
-  <div>
-    <h1>
-      Profile for <%= @the_member.user.first_name %> <%= @the_member.user.last_name %>
-    </h1>
-    <dl>
-      <dt>
-        Name
-      </dt>
-      <dd>
-        <%= @the_member.user.first_name %> <%= @the_member.user.last_name %>
-      </dd>
-      <dt>
-        Profile image
-      </dt>
-      <dd>
-        <img src=<%= @the_member.user.profile_image %> style="width:250px;">
-      </dd>
-      <dt>
-        Bio
-      </dt>
-      <dd>
-        <%= @the_member.user.bio %>
-      </dd>
-    </dl>
+<div class="card mb-3" style="
+  width:702px; display: block;
+  margin-left: auto;
+  margin-right: auto;">
+  <img class="card-img-top" src=<%= @the_member.user.profile_image %> alt="<%= @the_member %>'s profile image" style="width:700px;">
+  <div class="card-body">
+    <h3 class="card-title" style="font-family: 'Architects Daughter', cursive;"><%= @the_member.user.first_name %> <%= @the_member.user.last_name %></h3>
+    <p class="card-text"><%= @the_member.user.bio %></p>
+    <p class="card-text"><small class="text-muted"><%= @the_member.role.role %></small></p>
   </div>
 </div>
+
 <hr>
-<h2>Coupons</h2>
-<table border="1">
+<div class="card text-center">
+  <div class="card-header">
+    Coupons
+  </div>
+  <div class="card-body">
   <% if (@the_member.role.role == "Daughter") || (@the_member.role.role == "Son") %>
-    <tr>
-      <th>
-        Coupon Content
-      </th>
-      <th>
-        Giver Name
-      </th>
-      <th>
-        Expiration Date
-      </th>
-    </tr>
-    <% @list_of_members.each do |a_member| %>
+  <% @list_of_members.each do |a_member| %>
       <% if a_member.user_id == @the_member.user_id %>
         <% @the_member.user.coupons.each do |a_coupon| %>
           <tr>
             <td>
-              <%= a_coupon.coupon_content %>
+              <h3 class="card-title">
+                <img src="https://help.idevaffiliate.com/wp-content/uploads/2015/04/coupon-graphic.gif" style="width:100px;">
+                <%= a_coupon.coupon_content %>
+              </h3>
             </td>
             <td>
-              <% matching_role_id = Member.where({ :user_id => a_coupon.giver_id }).at(0).role_id %>
-              <%= Role.where({ :id => matching_role_id }).at(0).role %>
+              <p class="card-text">
+                <div style="font-family: 'Architects Daughter', cursive; font-weight: bold; text-decoration: underline;">Giver Name:</div>
+                <% matching_role_id = Member.where({ :user_id => a_coupon.giver_id }).at(0).role_id %>
+                <%= Role.where({ :id => matching_role_id }).at(0).role %>
+              </p>
             </td>
             <td>
-              <%= a_coupon.expiration_date %>
+              <p class="card-text">
+                <div style="font-family: 'Architects Daughter', cursive; font-weight: bold; text-decoration: underline;">Expiration Date:</div>
+                <%= a_coupon.expiration_date %>
+              </p>
             </td>
+            <br>
             <td>
-              <a href="/chores/<%= a_coupon.chore.id %>">
+              <a href="/chores/<%= a_coupon.chore.id %>" type="button" class="btn btn-outline-dark">
                 Details of the Linked Chore
               </a>
             </td>
+            <br>
+            <br>
           </tr>
         <% end %>
       <% end %>
     <% end %>
   <% else %>
-    <tr>
-      <th>
-        Coupon Content
-      </th>
-      <th>
-        Receiver Kid Name
-      </th>
-      <th>
-        Expiration Date
-      </th>
-    </tr>
-    <% @list_of_members.each do |a_member| %>
+  <% @list_of_members.each do |a_member| %>
       <% if a_member.user_id == @the_member.user_id %>
         <% a_member.coupons.each do |a_coupon| %>
           <tr>
             <td>
-              <%= a_coupon.coupon_content %>
+              <h3 class="card-title">
+                <img src="https://help.idevaffiliate.com/wp-content/uploads/2015/04/coupon-graphic.gif" style="width:100px;">
+                <%= a_coupon.coupon_content %>
+              </h3>
             </td>
             <td>
-              <%= User.where({ :id => a_coupon.receiver_id }).at(0).first_name %>
+              <p class="card-text">
+                <div style="font-family: 'Architects Daughter', cursive; font-weight: bold; text-decoration: underline;">Receiver Kid:</div>
+                <%= User.where({ :id => a_coupon.receiver_id }).at(0).first_name %>
+              </p>
             </td>
             <td>
-              <%= a_coupon.expiration_date %>
+              <p class="card-text">
+                <div style="font-family: 'Architects Daughter', cursive; font-weight: bold; text-decoration: underline;">Expiration Date:</div>
+                <%= a_coupon.expiration_date %>
+              <p class="card-text">
             </td>
+            <br>
             <td>
-              <a href="/chores/<%= a_coupon.chore.id %>">
+              <a href="/chores/<%= a_coupon.chore.id %>" type="button" class="btn btn-outline-dark">
                 Details of the Linked Chore
               </a>
             </td>
+            <br>
+            <br>
           </tr>
         <% end %>
       <% end %>
     <% end %>
   <% end %>
-</table>
+  </div>
+</div>
 <hr>
 <div>
   <div>
     <% if @current_user.id == @the_member.user_id %>
-      <h2>
-        Edit Your Profile
+      <h2 style="font-family: 'Architects Daughter', cursive;">
+        <img src="https://www.clipartkey.com/mpngs/m/184-1840185_pen-and-paper-png-edit-icon-jpg.png" style="width:50px; display: block; margin-left: auto; margin-right: auto;">
+        <div style="text-align: center;">Edit Your Profile</div>
       </h2>
-      <form action="/modify_member/<%= @the_member.id %>"  method="post" >
-        <div>
-          <label for="name_box">
-            Name
-          </label>
-          <input type="text" id="name_box" name="query_name" value="<%= @the_member.user.first_name %>">
+      <form action="/modify_member/<%= @the_member.id %>"  method="post">
+        <div class="row form-group">
+          <div class="col">
+            <label for="name_box">
+              First Name
+            </label>
+            <input type="text" id="name_box" name="query_first_name" value="<%= @the_member.user.first_name %>">
+          </div>
         </div>
-        <div>
+        <div class="form-group">
           <label for="profile_image_box">
             Profile image
           </label>
-          <input type="text" id="profile_image_box" name="query_profile_image" value="<%= @the_member.user.profile_image %>">
+          <input type="text" class="form-control" id="profile_image_box" name="query_profile_image" aria-describedby="imageHelp" value="<%= @the_member.user.profile_image %>">
+          <small id="imageHelp" class="form-text text-muted">Enter your new profile image url here to update.</small>
         </div>
-        <div>
+        <div class="form-group">
           <label for="bio_box">
             Bio
           </label>
-          <textarea id="bio_box" name="query_bio"><%= @the_member.user.bio %></textarea>
+          <textarea class="form-control" id="bio_box" name="query_bio"><%= @the_member.user.bio %></textarea>
         </div>
-        <button>
-          Update Your Profile
-        </button>
+        <button class="form-group" type="submit" style="font-family: 'Architects Daughter', cursive;">UPDATE YOUR PROFILE</button>
       </form>
-      <hr>
-      <%# One shouldn't be allowed to delete family members %>
     <% end %>
      <div>
       <div>
-        <a href="/members" class="btn btn-secondary btn-lg btn-block">
+        <a href="/members" class="btn btn-secondary btn-lg">
           Go back
         </a>
         <%# &nbsp;|&nbsp; %>
@@ -142,5 +133,6 @@
     </div>
   </div>
 </div>
+
 
 
