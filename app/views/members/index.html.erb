@@ -1,45 +1,59 @@
 <div>
-  <div>
+  <div style="
+  font-family: 'Architects Daughter', cursive;
+  background-image: url('https://i.pinimg.com/originals/53/07/1d/53071d53bf9f39c462ebfe9cd68bf6a5.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 25px;">
     <h1>
       The <%= @current_user.last_name %> Family
       <%# List of all family members %>
     </h1>
     <p>
-      [Being a FAMIly means you are part of something very wonderful. It means you will love and be loved for the rest of your life. No matter what.]
+      Being a FAMIly means you are part of something very wonderful.
+      It means you will love and be loved for the rest of your life.
     </p>
   </div>
 </div>
-
 <hr>
-
 <div>
   <div>
-    <table border="1">
+    <table class="table table-sm">
+      <thead>
       <tr>
         <%# <th>
           ID
         </th> %>
-        <th>
-          Name
+        <th scope="col">
+          <%# Name %>
+          <img src="https://png.pngtree.com/png-vector/20191007/ourmid/pngtree-plastic-name-badge-with-neck-strap-icon-png-image_1796127.jpg" 
+          style="width:50px; margin-left: auto; margin-right: auto;">
         </th>
 
-        <th>
-          Role
+        <th scope="col">
+          <%# Role %>
+          <img src="https://static.vecteezy.com/system/resources/previews/000/267/083/non_2x/silhouette-of-a-family-vector.jpg" 
+          style="width:50px; margin-left: auto; margin-right: auto;">
         </th>
 
-        <th>
-          Profile image
+        <th scope="col">
+          <%# Profile image %>
+          <img src="https://i.dlpng.com/static/png/7174196_preview.png" style="width:50px; display: block; margin-left: auto; margin-right: auto;">
         </th>
 
-        <th>
-          Bio
+        <th scope="col">
+          <%# Bio %>
+          <img src="https://www.pngitem.com/pimgs/m/479-4795914_free-vector-dialog-box-104-models-png-png.png" style="width:50px; display: block; margin-left: auto; margin-right: auto;">
         </th>
 
-        <th>
+        <th scope="col">
         </th>
       </tr>
+      </thead>
 
       <% @list_of_members.each do |a_member| %>
+      <tbody>
       <tr>
         <td>
           <%= a_member.user.first_name %>
@@ -53,16 +67,20 @@
           <img src=<%= a_member.user.profile_image %> style="width:250px;">
         </td>
 
-        <td>
+        <td style="text-align: center;">
           <%= a_member.user.bio %>
         </td>
 
-        <td>
+        <td style="font-family: 'Architects Daughter', cursive;">
           <a href="/members/<%= a_member.id %>">
             <% if @current_user.id == a_member.user_id %>
-              My Profile
+              <div style="border-style: outset; padding: 35px; border-width: thin; text-align: center; font-size: large;" class="rounded"> 
+                MY PROFILE
+              </div>
             <% else %>
-              More Information
+              <div style="border-style: outset; padding: 35px; border-width: thin; text-align: center; font-size: large;" class="rounded">
+                MORE INFORMATION
+              </div>
             <% end %>
           </a>
         </td>

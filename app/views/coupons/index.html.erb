@@ -25,13 +25,13 @@
     <% end %>
   </div>
 </div>
-<%# <hr> %>
+<br>
 <div>
   <div>
     <% matching_role_id = Member.where({ :user_id => @current_user.id }).at(0).role_id %>
     <% matching_role = Role.where({ :id => matching_role_id }).at(0).role %>
     <% if (matching_role == "Son") || (matching_role == "Daughter") %>
-      <table class="card-deck">
+      <table class="card-group">
         <% @list_of_coupons.each do |a_coupon| %>
           <tr>
             <div class="card">
@@ -68,7 +68,7 @@
         <% end %>
       </table>
     <% else %>
-      <table class="card-deck">
+      <table class="card-group">
         <% @list_of_coupons.each do |a_coupon| %>
           <tr>
             <div class="card">
