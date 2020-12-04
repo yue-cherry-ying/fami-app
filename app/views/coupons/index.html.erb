@@ -1,124 +1,103 @@
 <div>
-  <div>
+  <div style="
+  font-family: 'Architects Daughter', cursive; 
+  background-image: url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 25px;">
     <% matching_role_id = Member.where({ :user_id => @current_user.id }).at(0).role_id %>
     <% matching_role = Role.where({ :id => matching_role_id }).at(0).role %>
     <% if matching_role != "Son" %>
       <% if matching_role != "Daughter" %>
         <h1>
-          All Coupons You've Granted
+          ALL COUPONS YOU'VE GRANTED
         </h1>
       <% else %>
         <h1>
-          Your Coupons
+          YOUR COUPONS
         </h1>
       <% end %>
     <% else %>
       <h1>
-        Your Coupons
+        YOUR COUPONS
       </h1>
     <% end %>
   </div>
 </div>
-<hr>
+<%# <hr> %>
 <div>
   <div>
     <% matching_role_id = Member.where({ :user_id => @current_user.id }).at(0).role_id %>
     <% matching_role = Role.where({ :id => matching_role_id }).at(0).role %>
     <% if (matching_role == "Son") || (matching_role == "Daughter") %>
-      <table>
-        <tr>
-          <th>
-          </th>
-          <th>
-            Giver
-          </th>
-          <th>
-            Coupon content
-          </th>
-          <th>
-            Expiration date
-          </th>
-          <th>
-            Redeemed
-          </th>
-          <th>
-          </th>
-        </tr>
+      <table class="card-deck">
         <% @list_of_coupons.each do |a_coupon| %>
           <tr>
+            <div class="card">
             <% if a_coupon.receiver_id == @current_user.id %>
               <td>
-                <img src="https://help.idevaffiliate.com/wp-content/uploads/2015/04/coupon-graphic.gif" style="width:150px;">
+                <img class="card-img-top" src="https://help.idevaffiliate.com/wp-content/uploads/2015/04/coupon-graphic.gif" style="width:150px;">
               </td>
-              <td>
+              <td class="card-body">
+                <h5 class="card-title" style="font-family: 'Architects Daughter', cursive;">Giver</h5>
                 <% matching_role = Member.where({ :user_id => a_coupon.giver_id }).at(0).role_id %>
                 <%= Role.where({ :id => matching_role }).at(0).role %>
               </td>
-              <td>
+              <td class="card-body">
+                <h5 class="card-title" style="font-family: 'Architects Daughter', cursive;">Coupon Content</h5>
                 <%= a_coupon.coupon_content %>
               </td>
-              <td>
+              <td class="card-body">
+                <h5 class="card-title" style="font-family: 'Architects Daughter', cursive;">Expiration date</h5>
                 <%= a_coupon.expiration_date %>
               </td>
-              <td>
+              <td class="card-body">
                 <% if a_coupon.redeemed == false%>
                   Haven't redeemed
                 <% else %>
                   Redeemed
                 <% end %>
               </td>
-              <td>
+              <td class="card-footer">
                 <a href="/redeem_coupon/<%= a_coupon.id %>"> Redeem Coupon </a>
               </td>
             <% end %>
+            </div>
           </tr>
         <% end %>
       </table>
     <% else %>
-      <table>
-        <tr>
-          <th>
-          </th>
-          <th>
-            Receiver
-          </th>
-          <th>
-            Coupon content
-          </th>
-          <th>
-            Expiration date
-          </th>
-          <th>
-            Redeemed
-          </th>
-          <th>
-          </th>
-        </tr>
+      <table class="card-deck">
         <% @list_of_coupons.each do |a_coupon| %>
           <tr>
+            <div class="card">
             <% if a_coupon.giver_id == @current_user.id %>
               <td>
-                <img src="https://help.idevaffiliate.com/wp-content/uploads/2015/04/coupon-graphic.gif" style="width:150px;">
+                <img class="card-img-top" src="https://help.idevaffiliate.com/wp-content/uploads/2015/04/coupon-graphic.gif" style="width:150px;">
               </td>
-              <td>
+              <td class="card-body">
+                <h5 class="card-title" style="font-family: 'Architects Daughter', cursive;">Receiver</h5>
                 <% matching_role = Member.where({ :user_id => a_coupon.receiver_id }).at(0).role_id %>
                 <%= User.where({ :id => a_coupon.receiver_id }).at(0).first_name %>
                 (<%= Role.where({ :id => matching_role }).at(0).role %>)
               </td>
-              <td>
+              <td class="card-body">
+                <h5 class="card-title" style="font-family: 'Architects Daughter', cursive;">Coupon Content</h5>
                 <%= a_coupon.coupon_content %>
               </td>
-              <td>
+              <td class="card-body">
+                <h5 class="card-title" style="font-family: 'Architects Daughter', cursive;">Expiration date</h5>
                 <%= a_coupon.expiration_date %>
               </td>
-              <td>
+              <td class="card-body">
                 <% if a_coupon.redeemed == false%>
                   Haven't redeemed
                 <% else %>
                   Redeemed
                 <% end %>
               </td>
-              <td>
+              <td class="card-footer">
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <a href="/delete_coupon/<%= a_coupon.id %>" class="btn btn-warning">
                   Delete Coupon
