@@ -53,14 +53,16 @@
                 <%= a_coupon.expiration_date %>
               </td>
               <td class="card-body">
-                <% if a_coupon.redeemed == false%>
+                <% if a_coupon.redeemed == false %>
                   Haven't redeemed
                 <% else %>
                   Redeemed
                 <% end %>
               </td>
               <td class="card-footer">
-                <a href="/redeem_coupon/<%= a_coupon.id %>"> Redeem Coupon </a>
+                <% if a_coupon.redeemed == false %>
+                  <a href="/redeem_coupon/<%= a_coupon.id %>"> Redeem Coupon </a>
+                <% end %>
               </td>
             <% end %>
             </div>
