@@ -14,3 +14,5 @@ Are you a parent and want your kids to help out more around the house but find i
 The Fami app is designed to personalize chores for each kid, and after completing each chore, kids will receive a coupon reward of their choice. Chores are no longer a burden, they become fun and the start of a series healthy family activities.
 
 ## TRY OUR APP TODAY!
+
+( See Idea Staging Roadmap <a href="https://ideas-staging.firstdraft.com/ideas/337">HERE</a> )
