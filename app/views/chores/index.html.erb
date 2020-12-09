@@ -40,9 +40,9 @@ background-color: #e9e9e9;">
                   <% matching_role_id = Member.where({ :user_id => user.id }).at(0).role_id %>
                   <% matching_role = Role.where({ :id => matching_role_id }).at(0).role %>
                   <% if matching_role == "Son" %>
-                    <option value=<% user.id %>><%= user.first_name %></option>
+                    <option value=<%= user.id %>><%= user.first_name %></option>
                   <% elsif matching_role == "Daughter" %>
-                    <option value=<% user.id %>><%= user.first_name %></option>
+                    <option value=<%= user.id %>><%= user.first_name %></option>
                   <% end %>
                 <% end %>
               <% end %>

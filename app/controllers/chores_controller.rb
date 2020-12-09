@@ -62,7 +62,7 @@ class ChoresController < ApplicationController
     the_chore.completed = params.fetch("query_completed", false)
     # the_chore.coupon_id = params.fetch("query_coupon_id")
     # the_chore.coupon_id = Coupon.where({ :receiver_id => @current_user.id }).at(0).id
-    the_chore.coupon_id = NULL
+    # the_chore.coupon_id = NULL
 
     if the_chore.valid?
       the_chore.save
